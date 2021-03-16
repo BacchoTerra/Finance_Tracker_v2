@@ -2,6 +2,7 @@ package com.bacchoterra.financetrackerv2.utils
 
 import android.app.Activity
 import android.os.Handler
+import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.adapter.ChatAdapter
 import com.bacchoterra.financetrackerv2.model.ChatMessage
@@ -9,7 +10,7 @@ import kotlin.random.Random
 
 class FakeChatBuilder(
     private val adapter: ChatAdapter,
-    private val list: ArrayList<ChatMessage>, private val activity: Activity
+    private val list: ArrayList<ChatMessage>, private val activity: Activity, private val recyclerView: RecyclerView
 ) {
 
     //Handler to create a time countdown
@@ -38,7 +39,7 @@ class FakeChatBuilder(
         handler.postDelayed({
             removeLastListItem()
             list.add(createBotChatMessage(activity.getString(R.string.chat_request_name_message)))
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
             enableNameListener?.invoke()
 
         }, getRandomWaitingTime())
@@ -50,10 +51,10 @@ class FakeChatBuilder(
 
         list.add(createUserChatMessage(name))
         list.add(createLoadingChatMessage())
-        adapter.notifyDataSetChanged()
+        notifyDataSetAndScroll()
 
         handler.postDelayed({
-            list.removeAt(list.lastIndex)
+            removeLastListItem()
             list.add(
                 createBotChatMessage(
                     activity.getString(R.string.certo) + " $name ," + activity.getString(
@@ -61,26 +62,8 @@ class FakeChatBuilder(
                     )
                 )
             )
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
             nameInsertedListener?.invoke()
-
-        }, getRandomWaitingTime())
-
-
-    }
-
-    fun askForPassword() {
-
-        list.add(createLoadingChatMessage())
-        adapter.notifyDataSetChanged()
-
-
-        handler.postDelayed({
-
-            list.removeAt(list.lastIndex)
-            list.add(createBotChatMessage(activity.getString(R.string.want_to_add_password)))
-            adapter.notifyDataSetChanged()
-            enablePasswordChoiceListener?.invoke()
 
         }, getRandomWaitingTime())
 
@@ -95,39 +78,86 @@ class FakeChatBuilder(
         if (name.isBlank()) {
 
             list.add(createLoadingChatMessage())
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
 
             handler.postDelayed({
-                list.removeAt(list.lastIndex)
+                removeLastListItem()
                 list.add(createBotChatMessage(activity.getString(R.string.invalid_blanck_name)))
-                adapter.notifyDataSetChanged()
+                notifyDataSetAndScroll()
 
             }, getRandomWaitingTime())
         } else {
             list.add(createLoadingChatMessage())
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
 
             handler.postDelayed({
-                list.removeAt(list.lastIndex)
+                removeLastListItem()
                 list.add(createBotChatMessage(activity.getString(R.string.invalid_short_name)))
-                adapter.notifyDataSetChanged()
+                notifyDataSetAndScroll()
             }, getRandomWaitingTime())
 
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
         }
+
+    }
+
+    fun askForPassword() {
+
+        list.add(createLoadingChatMessage())
+        notifyDataSetAndScroll()
+
+
+        handler.postDelayed({
+
+            removeLastListItem()
+            list.add(createBotChatMessage(activity.getString(R.string.want_to_add_password)))
+            notifyDataSetAndScroll()
+            enablePasswordChoiceListener?.invoke()
+
+        }, getRandomWaitingTime())
+
+
+    }
+
+    fun enableUserToAddPassword() {
+        list.add(createUserChatMessage(activity.getString(R.string.i_want_to_add_password)))
+        list.add(createLoadingChatMessage())
+        notifyDataSetAndScroll()
+        handler.postDelayed({
+            removeLastListItem()
+            list.add(createBotChatMessage(activity.getString(R.string.Insert_password)))
+            notifyDataSetAndScroll()
+            enablePasswordListener?.invoke()
+        },getRandomWaitingTime())
+
+    }
+
+    fun passwordAdded(password: String) {
+
+        list.add(createUserChatMessage("●".repeat(password.length)))
+        list.add(createLoadingChatMessage())
+        notifyDataSetAndScroll()
+
+        handler.postDelayed({
+            removeLastListItem()
+            list.add(createBotChatMessage(activity.getString(R.string.password_saved)))
+            notifyDataSetAndScroll()
+
+            notifyUserOfSecurity()
+        },getRandomWaitingTime())
 
     }
 
     fun dontWantPassword() {
         list.add(createUserChatMessage(activity.getString(R.string.nao)))
         list.add(createLoadingChatMessage())
-        adapter.notifyDataSetChanged()
+        notifyDataSetAndScroll()
 
         handler.postDelayed({
 
-            list.removeAt(list.lastIndex)
+            removeLastListItem()
             list.add(createBotChatMessage(activity.getString(R.string.cert_start_using_app_now)))
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
             notifyUserOfSecurity()
 
         }, getRandomWaitingTime())
@@ -137,13 +167,13 @@ class FakeChatBuilder(
     private fun notifyUserOfSecurity() {
 
         list.add(createLoadingChatMessage())
-        adapter.notifyDataSetChanged()
+        notifyDataSetAndScroll()
 
         handler.postDelayed({
 
-            list.removeAt(list.lastIndex)
+            removeLastListItem()
             list.add(createBotChatMessage(activity.getString(R.string.chat_security_message_to_ease_user)))
-            adapter.notifyDataSetChanged()
+            notifyDataSetAndScroll()
             finishedListener?.invoke()
 
         }, getRandomWaitingTime())
@@ -163,32 +193,9 @@ class FakeChatBuilder(
     private fun createUserChatMessage(message: String): ChatMessage =
         ChatMessage(message, ChatMessage.TYPE_USER)
 
-    fun enableUserToAddPassword() {
-        list.add(createUserChatMessage(activity.getString(R.string.i_want_to_add_password)))
-        list.add(createLoadingChatMessage())
+    private fun notifyDataSetAndScroll(){
         adapter.notifyDataSetChanged()
-        handler.postDelayed({
-            list.removeAt(list.lastIndex)
-            list.add(createBotChatMessage(activity.getString(R.string.Insert_password)))
-            adapter.notifyDataSetChanged()
-            enablePasswordListener?.invoke()
-        },getRandomWaitingTime())
-
-    }
-
-    fun passwordAdded(password: String) {
-
-        list.add(createUserChatMessage("●".repeat(password.length)))
-        list.add(createLoadingChatMessage())
-        adapter.notifyDataSetChanged()
-
-        handler.postDelayed({
-            removeLastListItem()
-            list.add(createBotChatMessage(activity.getString(R.string.password_saved)))
-            adapter.notifyDataSetChanged()
-
-            notifyUserOfSecurity()
-        },getRandomWaitingTime())
+        recyclerView.scrollToPosition(adapter.itemCount -1)
 
     }
 }

@@ -53,7 +53,7 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
 
-        fakeChatBuilder = FakeChatBuilder(adapter, list, this)
+        fakeChatBuilder = FakeChatBuilder(adapter, list, this,recyclerView)
 
     }
 
