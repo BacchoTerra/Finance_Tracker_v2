@@ -2,7 +2,6 @@ package com.bacchoterra.financetrackerv2.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -17,13 +16,13 @@ import com.bacchoterra.financetrackerv2.utils.FakeChatBuilder
 class ChatActivity : AppCompatActivity() {
 
     //Layout components
-    private lateinit var binder:ActivityChatBinding
+    private lateinit var binder: ActivityChatBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var container: ViewGroup
 
     //recyclerView components
-    private lateinit var adapter:ChatAdapter
-    private lateinit var list:ArrayList<ChatMessage>
+    private lateinit var adapter: ChatAdapter
+    private lateinit var list: ArrayList<ChatMessage>
 
     //fake chat builder
     private lateinit var fakeChatBuilder: FakeChatBuilder
@@ -35,16 +34,17 @@ class ChatActivity : AppCompatActivity() {
         setContentView(binder.root)
         initViews()
         initRecyclerView()
+        constructFakeChat()
     }
 
-    private fun initViews(){
+    private fun initViews() {
 
         recyclerView = binder.activityChatRecyclerView
         container = binder.activityChatContainer
 
     }
 
-    private fun initRecyclerView (){
+    private fun initRecyclerView() {
 
         val layoutManager = LinearLayoutManager(this)
         list = ArrayList()
@@ -53,17 +53,28 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
 
-        fakeChatBuilder = FakeChatBuilder(adapter,list,this)
+        fakeChatBuilder = FakeChatBuilder(adapter, list, this)
 
+    }
+
+    private fun constructFakeChat() {
         fakeChatBuilder.firstListPopulation()
         fakeChatBuilder.enableNameListener = {
             enableUserToInsertName()
         }
 
+        enableUserToChoosePassword()
+
+        fakeChatBuilder.finishedListener = {
+
+            val view = layoutInflater.inflate(R.layout.activity_chat_done, container)
+
+        }
+
     }
 
     private fun enableUserToInsertName() {
-        val view = layoutInflater.inflate(R.layout.activity_chat_insert_name,container)
+        val view = layoutInflater.inflate(R.layout.activity_chat_insert_name, container)
 
         val btnSend = view.findViewById<Button>(R.id.activity_chat_insert_name_btnSend)
         val editName = view.findViewById<EditText>(R.id.activity_chat_insert_name_editName)
@@ -73,17 +84,76 @@ class ChatActivity : AppCompatActivity() {
 
             val name = editName.text.toString().trim()
 
-            if (name.length <3){
+            if (name.length < 3) {
                 fakeChatBuilder.invalidNameInput(name)
 
 
-
-
-            }else{
+            } else {
                 fakeChatBuilder.insertUserName(editName.text.toString())
                 container.removeAllViews()
             }
         }
+
+    }
+
+    private fun enableUserToChoosePassword() {
+
+        fakeChatBuilder.nameInsertedListener = {
+
+            fakeChatBuilder.askForPassword()
+
+            fakeChatBuilder.enablePasswordChoiceListener = {
+
+                val view = layoutInflater.inflate(R.layout.activity_chat_password_choice, container)
+
+                val btnYes = view.findViewById<Button>(R.id.activity_chat_password_choice_btnYes)
+                val btnNo = view.findViewById<Button>(R.id.activity_chat_password_choice_btnNo)
+
+                btnYes.setOnClickListener {
+                    fakeChatBuilder.enableUserToAddPassword()
+                    container.removeAllViews()
+
+                    fakeChatBuilder.enablePasswordListener = {
+
+                        val view2 = layoutInflater.inflate(
+                            R.layout.activity_chat_insert_password,
+                            container
+                        )
+
+                        val editPassword =
+                            view2.findViewById<EditText>(R.id.activity_chat_insert_password_editpassword)
+                        val btnSend =
+                            view2.findViewById<Button>(R.id.activity_chat_insert_password_btnSend)
+
+                        btnSend.setOnClickListener {
+
+                            val passWord = editPassword.text.toString()
+
+                            if (passWord.length < 3) {
+                                editPassword.error = getString(R.string.min_3_chars)
+                            } else {
+                                container.removeAllViews()
+
+                                fakeChatBuilder.passwordAdded(passWord)
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                btnNo.setOnClickListener {
+
+                    fakeChatBuilder.dontWantPassword()
+                    container.removeAllViews()
+                }
+
+            }
+
+        }
+
 
     }
 

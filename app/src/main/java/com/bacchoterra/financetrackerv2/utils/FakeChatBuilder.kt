@@ -17,7 +17,10 @@ class FakeChatBuilder(
 
     //Lambda callback
     var enableNameListener: (() -> Unit)? = null
+    var nameInsertedListener: (() -> Unit)? = null
+    var enablePasswordChoiceListener: (() -> Unit)? = null
     var enablePasswordListener: (() -> Unit)? = null
+    var finishedListener : (() -> Unit)? = null
 
     init {
         initComponents()
@@ -59,15 +62,14 @@ class FakeChatBuilder(
                 )
             )
             adapter.notifyDataSetChanged()
-
-            askForPassword()
+            nameInsertedListener?.invoke()
 
         }, getRandomWaitingTime())
 
 
     }
 
-    private fun askForPassword() {
+    fun askForPassword() {
 
         list.add(createLoadingChatMessage())
         adapter.notifyDataSetChanged()
@@ -78,7 +80,7 @@ class FakeChatBuilder(
             list.removeAt(list.lastIndex)
             list.add(createBotChatMessage(activity.getString(R.string.want_to_add_password)))
             adapter.notifyDataSetChanged()
-            enablePasswordListener?.invoke()
+            enablePasswordChoiceListener?.invoke()
 
         }, getRandomWaitingTime())
 
@@ -116,6 +118,39 @@ class FakeChatBuilder(
 
     }
 
+    fun dontWantPassword() {
+        list.add(createUserChatMessage(activity.getString(R.string.nao)))
+        list.add(createLoadingChatMessage())
+        adapter.notifyDataSetChanged()
+
+        handler.postDelayed({
+
+            list.removeAt(list.lastIndex)
+            list.add(createBotChatMessage(activity.getString(R.string.cert_start_using_app_now)))
+            adapter.notifyDataSetChanged()
+            notifyUserOfSecurity()
+
+        }, getRandomWaitingTime())
+
+    }
+
+    private fun notifyUserOfSecurity() {
+
+        list.add(createLoadingChatMessage())
+        adapter.notifyDataSetChanged()
+
+        handler.postDelayed({
+
+            list.removeAt(list.lastIndex)
+            list.add(createBotChatMessage(activity.getString(R.string.chat_security_message_to_ease_user)))
+            adapter.notifyDataSetChanged()
+            finishedListener?.invoke()
+
+        }, getRandomWaitingTime())
+
+
+    }
+
     private fun removeLastListItem() = list.removeAt(list.lastIndex)
 
     private fun createLoadingChatMessage(): ChatMessage = ChatMessage("", ChatMessage.TYPE_LOADING)
@@ -127,4 +162,33 @@ class FakeChatBuilder(
 
     private fun createUserChatMessage(message: String): ChatMessage =
         ChatMessage(message, ChatMessage.TYPE_USER)
+
+    fun enableUserToAddPassword() {
+        list.add(createUserChatMessage(activity.getString(R.string.i_want_to_add_password)))
+        list.add(createLoadingChatMessage())
+        adapter.notifyDataSetChanged()
+        handler.postDelayed({
+            list.removeAt(list.lastIndex)
+            list.add(createBotChatMessage(activity.getString(R.string.Insert_password)))
+            adapter.notifyDataSetChanged()
+            enablePasswordListener?.invoke()
+        },getRandomWaitingTime())
+
+    }
+
+    fun passwordAdded(password: String) {
+
+        list.add(createUserChatMessage("●".repeat(password.length)))
+        list.add(createLoadingChatMessage())
+        adapter.notifyDataSetChanged()
+
+        handler.postDelayed({
+            removeLastListItem()
+            list.add(createBotChatMessage(activity.getString(R.string.password_saved)))
+            adapter.notifyDataSetChanged()
+
+            notifyUserOfSecurity()
+        },getRandomWaitingTime())
+
+    }
 }
