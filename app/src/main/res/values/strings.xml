@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Finance Tracker v2</string>
+    <string name="chat_welcome_message">Olá! Bem vindo ao Finance Tracker. O melhor lugar para organizar seus investimentos.</string>
+    <string name="chat_request_name_message">Como podemos te chamar?</string>
+    <string name="nome">Nome</string>
+    <string name="enviar">Enviar</string>
+    <string name="invalid_blanck_name">Seu nome está vazio!</string>
+    <string name="invalid_short_name">Seu nome está muito curto! Pelo menos 3 letras ok?</string>
+    <string name="want_to_add_password">Você gostaria de adicionar uma senha para acessar o aplicativo? Caso não queira agora, pode adicionar depois, sem problemas!</string>
+    <string name="certo">Certo</string>
+    <string name="you_are_close_to_use_our_app">você está muito perto de começar a usar nosso aplicativo!</string>
 </resources>

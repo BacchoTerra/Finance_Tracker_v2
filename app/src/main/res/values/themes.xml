@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FinanceTrackerV2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FinanceTrackerV2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColorDark</item>
         <item name="colorPrimaryVariant">@color/secondaryColorVariant</item>
@@ -12,4 +12,25 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="ChatTextView" parent="android:Widget.TextView">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/roboto</item>
+
+    </style>
+
+    <style name="ChatInputLayoutOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <item name="boxStrokeColor">@color/secondaryColorVariant</item>
+        <item name="hintTextColor">@color/secondaryColorVariant</item> <!-- For some reason, this change only the hint color when focusable focusable..-->
+        <item name="android:textColorHint">@color/secondaryColorVariant</item> <!-- For some reason, this change the hint color when not focusable..-->
+
+    </style>
+
+
+
+
 </resources>
