@@ -28,7 +28,6 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var fakeChatBuilder: FakeChatBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO: colorcar a tela em full screen
         super.onCreate(savedInstanceState)
         binder = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binder.root)
