@@ -53,23 +53,14 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
 
-        fakeChatBuilder = FakeChatBuilder(adapter, list, this,recyclerView)
 
     }
 
     private fun constructFakeChat() {
+        fakeChatBuilder = FakeChatBuilder(adapter, list, this, recyclerView)
+
         fakeChatBuilder.firstListPopulation()
-        fakeChatBuilder.enableNameListener = {
-            enableUserToInsertName()
-        }
-
-        enableUserToChoosePassword()
-
-        fakeChatBuilder.finishedListener = {
-
-            val view = layoutInflater.inflate(R.layout.activity_chat_done, container)
-
-        }
+        handleLayoutRequests()
 
     }
 
@@ -98,57 +89,74 @@ class ChatActivity : AppCompatActivity() {
 
     private fun enableUserToChoosePassword() {
 
-        fakeChatBuilder.nameInsertedListener = {
 
-            fakeChatBuilder.askForPassword()
+        val view = layoutInflater.inflate(R.layout.activity_chat_password_choice, container)
 
-            fakeChatBuilder.enablePasswordChoiceListener = {
+        val btnYes = view.findViewById<Button>(R.id.activity_chat_password_choice_btnYes)
+        val btnNo = view.findViewById<Button>(R.id.activity_chat_password_choice_btnNo)
 
-                val view = layoutInflater.inflate(R.layout.activity_chat_password_choice, container)
+        btnYes.setOnClickListener {
+            fakeChatBuilder.enableUserToAddPassword()
+            container.removeAllViews()
 
-                val btnYes = view.findViewById<Button>(R.id.activity_chat_password_choice_btnYes)
-                val btnNo = view.findViewById<Button>(R.id.activity_chat_password_choice_btnNo)
+        }
 
-                btnYes.setOnClickListener {
-                    fakeChatBuilder.enableUserToAddPassword()
-                    container.removeAllViews()
+        btnNo.setOnClickListener {
 
-                    fakeChatBuilder.enablePasswordListener = {
+            fakeChatBuilder.dontWantPassword()
+            container.removeAllViews()
+        }
 
-                        val view2 = layoutInflater.inflate(
-                            R.layout.activity_chat_insert_password,
-                            container
-                        )
 
-                        val editPassword =
-                            view2.findViewById<EditText>(R.id.activity_chat_insert_password_editpassword)
-                        val btnSend =
-                            view2.findViewById<Button>(R.id.activity_chat_insert_password_btnSend)
+    }
 
-                        btnSend.setOnClickListener {
+    private fun showAndHandlePasswordInput(){
+        val view2 = layoutInflater.inflate(
+            R.layout.activity_chat_insert_password,
+            container
+        )
 
-                            val passWord = editPassword.text.toString()
+        val editPassword =
+            view2.findViewById<EditText>(R.id.activity_chat_insert_password_editpassword)
+        val btnSend =
+            view2.findViewById<Button>(R.id.activity_chat_insert_password_btnSend)
 
-                            if (passWord.length < 3) {
-                                editPassword.error = getString(R.string.min_3_chars)
-                            } else {
-                                container.removeAllViews()
+        btnSend.setOnClickListener {
 
-                                fakeChatBuilder.passwordAdded(passWord)
+            val passWord = editPassword.text.toString()
 
-                            }
+            if (passWord.length < 3) {
+                editPassword.error = getString(R.string.min_3_chars)
+            } else {
+                container.removeAllViews()
 
-                        }
+                fakeChatBuilder.passwordAdded(passWord)
 
-                    }
+            }
 
-                }
 
-                btnNo.setOnClickListener {
+        }
 
-                    fakeChatBuilder.dontWantPassword()
-                    container.removeAllViews()
-                }
+    }
+
+    private fun showFinishedLayout () {
+        val view = layoutInflater.inflate(R.layout.activity_chat_done, container)
+    }
+
+    private fun handleLayoutRequests() {
+
+
+        fakeChatBuilder.layoutRequestListener = {
+
+
+            when (it) {
+
+                FakeChatBuilder.ENABLE_NAME_INPUT -> enableUserToInsertName()
+                FakeChatBuilder.NAME_INSERTED ->  fakeChatBuilder.askForPassword()
+                FakeChatBuilder.ENABLE_PASSWORD_CHOICE -> enableUserToChoosePassword()
+                FakeChatBuilder.ENABLE_PASSWORD_INPUT -> showAndHandlePasswordInput()
+                FakeChatBuilder.FINISHED -> showFinishedLayout()
+
 
             }
 
