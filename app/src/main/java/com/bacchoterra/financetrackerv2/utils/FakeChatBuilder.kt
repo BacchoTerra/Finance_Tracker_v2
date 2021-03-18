@@ -163,7 +163,7 @@ class FakeChatBuilder(
     }
 
     fun dontWantPassword() {
-        createUserChatMessage(activity.getString(R.string.nao))
+        createUserChatMessage(activity.getString(R.string.no))
         createLoadingChatMessage()
         notifyDataSetAndScroll()
 

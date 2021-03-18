@@ -5,18 +5,18 @@
     <string name="nome">Nome</string>
     <string name="enviar">Enviar</string>
     <string name="invalid_blanck_name">Seu nome está vazio!</string>
-    <string name="invalid_short_name">Seu nome está muito curto! Pelo menos 3 letras ok?</string>
+    <string name="invalid_short_name">Seu nome está muito curto! Pelo menos 3 letras OK?</string>
     <string name="want_to_add_password">Você gostaria de adicionar uma senha para acessar o aplicativo? Caso não queira agora, pode adicionar depois, sem problemas!</string>
     <string name="certo">Certo</string>
     <string name="you_are_close_to_use_our_app">você está muito perto de começar a usar nosso aplicativo!</string>
     <string name="sim">Sim</string>
-    <string name="agora_n_o">Agora não</string>
+    <string name="not_now">Agora não</string>
     <string name="cert_start_using_app_now">Certo, tudo pronto então!</string>
     <string name="chat_security_message_to_ease_user">Só lembrando que nós usamos um banco de daods local, então nehuma informação sua será colocada em risco.</string>
-    <string name="entrar">Entrar</string>
-    <string name="nao">Não</string>
+    <string name="enter">Entrar</string>
+    <string name="no">Não</string>
     <string name="Insert_password">Insira a senha por favor.</string>
-    <string name="senha">Senha</string>
+    <string name="password">Senha</string>
     <string name="weak_password">Senha muito fraca</string>
     <string name="min_3_chars">Mínimo de 3 caracteres</string>
     <string name="password_saved">Sua senha foi salva com sucesso!</string>
@@ -25,4 +25,7 @@
     <string name="saved_user_name">shared_prefs_saved_user_name</string>
     <string name="saved_user_password">shared_prefs_saved_user_password</string>
     <string name="saved_user_name_default_value">User</string>
+    <string name="splash_image">Imagem splash</string>
+    <string name="btn_access">Botão de acesso</string>
+    <string name="wrong_pasword">Senha incorreta</string>
 </resources>
