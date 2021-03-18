@@ -12,6 +12,7 @@ import com.bacchoterra.financetrackerv2.adapter.ChatAdapter
 import com.bacchoterra.financetrackerv2.databinding.ActivityChatBinding
 import com.bacchoterra.financetrackerv2.model.ChatMessage
 import com.bacchoterra.financetrackerv2.utils.FakeChatBuilder
+import com.bacchoterra.financetrackerv2.utils.SharedPrefsUtil
 
 class ChatActivity : AppCompatActivity() {
 
@@ -27,13 +28,23 @@ class ChatActivity : AppCompatActivity() {
     //fake chat builder
     private lateinit var fakeChatBuilder: FakeChatBuilder
 
+    //Shared preferences manager
+    private lateinit var sharedPrefsUtil: SharedPrefsUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binder = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binder.root)
+        initObjects()
         initViews()
         initRecyclerView()
         constructFakeChat()
+    }
+
+    private fun initObjects(){
+
+        sharedPrefsUtil = SharedPrefsUtil(this)
+
     }
 
     private fun initViews() {
@@ -63,7 +74,7 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    private fun enableUserToInsertName() {
+    private fun showAndHandleNameInput() {
         val view = layoutInflater.inflate(R.layout.activity_chat_insert_name, container)
 
         val btnSend = view.findViewById<Button>(R.id.activity_chat_insert_name_btnSend)
@@ -81,8 +92,21 @@ class ChatActivity : AppCompatActivity() {
             } else {
                 fakeChatBuilder.insertUserName(editName.text.toString())
                 container.removeAllViews()
+                saveUserName(name)
             }
         }
+
+    }
+
+    private fun saveUserName (name:String){
+
+        sharedPrefsUtil.saveUserName(name)
+
+    }
+
+    private fun saveUserPassword(password:String){
+
+        sharedPrefsUtil.saveUserPassword(password)
 
     }
 
@@ -110,26 +134,27 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun showAndHandlePasswordInput(){
-        val view2 = layoutInflater.inflate(
+        val view = layoutInflater.inflate(
             R.layout.activity_chat_insert_password,
             container
         )
 
         val editPassword =
-            view2.findViewById<EditText>(R.id.activity_chat_insert_password_editpassword)
+            view.findViewById<EditText>(R.id.activity_chat_insert_password_editpassword)
         val btnSend =
-            view2.findViewById<Button>(R.id.activity_chat_insert_password_btnSend)
+            view.findViewById<Button>(R.id.activity_chat_insert_password_btnSend)
 
         btnSend.setOnClickListener {
 
-            val passWord = editPassword.text.toString()
+            val password = editPassword.text.toString()
 
-            if (passWord.length < 3) {
+            if (password.length < 3) {
                 editPassword.error = getString(R.string.min_3_chars)
             } else {
                 container.removeAllViews()
 
-                fakeChatBuilder.passwordAdded(passWord)
+                fakeChatBuilder.passwordAdded(password)
+                saveUserPassword(password)
 
             }
 
@@ -140,6 +165,12 @@ class ChatActivity : AppCompatActivity() {
 
     private fun showFinishedLayout () {
         val view = layoutInflater.inflate(R.layout.activity_chat_done, container)
+
+        val btn = view.findViewById<Button>(R.id.activity_chat_done_btnDone)
+
+        btn.setOnClickListener {
+
+        }
     }
 
     private fun handleLayoutRequests() {
@@ -150,7 +181,7 @@ class ChatActivity : AppCompatActivity() {
 
             when (it) {
 
-                FakeChatBuilder.ENABLE_NAME_INPUT -> enableUserToInsertName()
+                FakeChatBuilder.ENABLE_NAME_INPUT -> showAndHandleNameInput()
                 FakeChatBuilder.NAME_INSERTED ->  fakeChatBuilder.askForPassword()
                 FakeChatBuilder.ENABLE_PASSWORD_CHOICE -> enableUserToChoosePassword()
                 FakeChatBuilder.ENABLE_PASSWORD_INPUT -> showAndHandlePasswordInput()

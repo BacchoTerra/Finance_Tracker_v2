@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/activity_chat_password_choice_btnYes"
+        android:id="@+id/activity_chat_done_btnDone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

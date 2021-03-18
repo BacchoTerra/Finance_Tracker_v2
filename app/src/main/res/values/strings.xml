@@ -21,4 +21,8 @@
     <string name="min_3_chars">Mínimo de 3 caracteres</string>
     <string name="password_saved">Sua senha foi salva com sucesso!</string>
     <string name="i_want_to_add_password">Sim, gostaria de manter o aplicativo com maior privacidade.</string>
+    <string name="preference_file_key">com.bacchoterra.financetrackerv2.file_key</string>
+    <string name="saved_user_name">shared_prefs_saved_user_name</string>
+    <string name="saved_user_password">shared_prefs_saved_user_password</string>
+    <string name="saved_user_name_default_value">User</string>
 </resources>
