@@ -1,5 +1,6 @@
 package com.bacchoterra.financetrackerv2.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
@@ -169,7 +170,7 @@ class ChatActivity : AppCompatActivity() {
         val btn = view.findViewById<Button>(R.id.activity_chat_done_btnDone)
 
         btn.setOnClickListener {
-
+            startActivity(Intent(this,MainActivity::class.java))
         }
     }
 

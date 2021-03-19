@@ -28,4 +28,9 @@
     <string name="splash_image">Imagem splash</string>
     <string name="btn_access">Botão de acesso</string>
     <string name="wrong_pasword">Senha incorreta</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="information">Informações</string>
+    <string name="profile">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

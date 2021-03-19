@@ -19,4 +19,7 @@
     <color name="textColor">#FFFFFF</color>
     <color name="chatGreenColor">#20BC5B</color>
 
+    <color name="btm_nav_checked_icon">@color/secondaryColorVariant</color>
+    <color name="btm_nav_unchecked_icon">#C4C4C4</color>
+
 </resources>

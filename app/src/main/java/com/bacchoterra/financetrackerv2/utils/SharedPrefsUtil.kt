@@ -42,7 +42,7 @@ class SharedPrefsUtil (private val activity: Activity){
 
     }
 
-    private fun nukeSharedPrefs(){
+    fun nukeSharedPrefs(){
 
         editor.clear().apply()
 
