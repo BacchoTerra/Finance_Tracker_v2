@@ -52,4 +52,24 @@ dependencies {
 
     //https://github.com/ybq/Android-SpinKit
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+
+    //LifeCycle dependencies
+    def lifecycle_version = "2.3.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+    //Room dependencies
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //Kotlin Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
+
 }
