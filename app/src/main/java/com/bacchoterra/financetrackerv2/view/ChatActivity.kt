@@ -183,9 +183,9 @@ class ChatActivity : AppCompatActivity() {
             when (it) {
 
                 FakeChatBuilder.ENABLE_NAME_INPUT -> showAndHandleNameInput()
-                FakeChatBuilder.NAME_INSERTED ->  fakeChatBuilder.askForPassword()
-                FakeChatBuilder.ENABLE_PASSWORD_CHOICE -> enableUserToChoosePassword()
-                FakeChatBuilder.ENABLE_PASSWORD_INPUT -> showAndHandlePasswordInput()
+                FakeChatBuilder.NAME_INSERTED ->  fakeChatBuilder.allSet()
+                //FakeChatBuilder.ENABLE_PASSWORD_CHOICE -> enableUserToChoosePassword()
+                //FakeChatBuilder.ENABLE_PASSWORD_INPUT -> showAndHandlePasswordInput()
                 FakeChatBuilder.FINISHED -> showFinishedLayout()
 
 

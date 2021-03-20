@@ -178,6 +178,26 @@ class FakeChatBuilder(
 
     }
 
+     fun allSet(){
+
+        createLoadingChatMessage()
+        notifyDataSetAndScroll()
+        waitForHandler()
+
+
+        handlerListener = {
+
+            removeLastListItem()
+            createBotChatMessage(activity.getString(R.string.cert_start_using_app_now))
+            notifyDataSetAndScroll()
+            notifyUserOfSecurity()
+
+
+        }
+
+
+    }
+
     private fun notifyUserOfSecurity() {
 
         createLoadingChatMessage()

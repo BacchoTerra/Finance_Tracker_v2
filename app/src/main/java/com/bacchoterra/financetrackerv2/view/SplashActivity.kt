@@ -12,98 +12,50 @@ import com.bacchoterra.financetrackerv2.utils.SharedPrefsUtil
 
 class SplashActivity : AppCompatActivity() {
 
-    //Layout components
-    private lateinit var binder:ActivitySplashBinding
-
-    //SharedPreferences manager
-    private lateinit var sharedPrefsUtil: SharedPrefsUtil
-
     companion object {
         const val SPLASH_TIME: Long = 1500
     }
 
+    //SharedPrefs Manager
+    private lateinit var sharedPrefsUtil: SharedPrefsUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binder = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binder.root)
-        initObjects()
+        setContentView(R.layout.activity_splash)
+        initSharedPrefs()
 
         handleSplashActivity()
 
     }
 
-    private fun initObjects() {
+    private fun initSharedPrefs(){
+
         sharedPrefsUtil = SharedPrefsUtil(this)
-    }
-
-    private fun handleSplashActivity() {
-
-
-        Handler().postDelayed({
-            handleNextMove()
-
-        }, SPLASH_TIME)
+        //sharedPrefsUtil.nukeSharedPrefs()
 
     }
 
-    private fun handleNextMove() {
-        if (isUserFirstTimeHere()) {
-            startChatActivity()
-        } else {
-            if (hasPassword()) {
-                enableUserToEnterPassword()
-            } else {
-                startMainActivity()
-            }
-        }
-    }
-
-    private fun startMainActivity() {
-        startActivity(Intent(this,MainActivity::class.java))
-        finish()
-    }
-
-    private fun startChatActivity() {
-        startActivity(Intent(this, ChatActivity::class.java))
-        finish()
-    }
-
-    private fun isUserFirstTimeHere(): Boolean {
+    private fun isUserFirstTime():Boolean{
 
         return sharedPrefsUtil.getUserName() == null
 
     }
 
-    private fun hasPassword(): Boolean {
+    private fun handleSplashActivity() {
 
-        return sharedPrefsUtil.getPassword() != null
+        Handler().postDelayed({
 
-    }
-
-    private fun enableUserToEnterPassword(){
-
-        binder.activitySplashInputLayout.visibility = View.VISIBLE
-        binder.activitySplashFabCheck.visibility = View.VISIBLE
-
-        checkPassword()
-
-    }
-
-    private fun checkPassword(){
-
-        binder.activitySplashFabCheck.setOnClickListener {
-
-            val password = sharedPrefsUtil.getPassword()
-            val input = binder.activitySplashEditPassword.text.toString()
-
-            if(input == password){
-                startMainActivity()
+            if (isUserFirstTime()){
+                startActivity(Intent(this, ChatActivity::class.java))
+                finish()
             }else{
-                binder.activitySplashInputLayout.error = getString(R.string.wrong_pasword)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
 
-        }
+        }, SPLASH_TIME)
 
     }
+
 
 }
