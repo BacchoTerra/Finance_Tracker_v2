@@ -3,6 +3,7 @@
     package="com.bacchoterra.financetrackerv2">
 
     <application
+        android:name=".application.FinanceApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

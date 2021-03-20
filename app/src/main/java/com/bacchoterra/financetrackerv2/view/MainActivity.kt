@@ -2,16 +2,23 @@ package com.bacchoterra.financetrackerv2.view
 
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.adapter.BottomNavAdapter
+import com.bacchoterra.financetrackerv2.application.FinanceApplication
 import com.bacchoterra.financetrackerv2.databinding.ActivityMainBinding
 import com.bacchoterra.financetrackerv2.fragments.DashboardFragment
 import com.bacchoterra.financetrackerv2.fragments.InformationFragment
 import com.bacchoterra.financetrackerv2.fragments.ProfileFragment
+import com.bacchoterra.financetrackerv2.model.Stock
+import com.bacchoterra.financetrackerv2.model.StockHistory
+import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
 
 class MainActivity : FragmentActivity() {
 
@@ -21,6 +28,12 @@ class MainActivity : FragmentActivity() {
     //Viewpager objects
     private lateinit var viewPager2: ViewPager2
     private lateinit var list: ArrayList<Fragment>
+
+    //ViewModel
+    private val viewModel: StockViewModel by viewModels {
+        StockViewModel.StockViewModelFactory((application as FinanceApplication).stockRepository)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
