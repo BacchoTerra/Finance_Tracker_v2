@@ -53,4 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <!-- TODO: Criar um style para o outlined inputlayout para trocar cursor e stroke line alem do textColor-->
 </androidx.constraintlayout.widget.ConstraintLayout>
