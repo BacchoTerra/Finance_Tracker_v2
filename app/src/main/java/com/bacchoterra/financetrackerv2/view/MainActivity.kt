@@ -29,11 +29,6 @@ class MainActivity : FragmentActivity() {
     private lateinit var viewPager2: ViewPager2
     private lateinit var list: ArrayList<Fragment>
 
-    //ViewModel
-    private val viewModel: StockViewModel by viewModels {
-        StockViewModel.StockViewModelFactory((application as FinanceApplication).stockRepository)
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

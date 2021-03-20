@@ -9,15 +9,26 @@ import com.bacchoterra.financetrackerv2.repository.StockRepository
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
-class StockViewModel(val repo:StockRepository):ViewModel(){
+class StockViewModel(private val repo:StockRepository):ViewModel(){
 
     val allStock = repo.allStock.asLiveData()
 
     fun insert(stock: Stock) = viewModelScope.launch {
-
         repo.insert(stock)
-
     }
+
+    fun update(stock: Stock) = viewModelScope.launch {
+        repo.update(stock)
+    }
+
+    fun delete(stock: Stock) = viewModelScope.launch {
+        repo.delete(stock)
+    }
+
+    fun deleteAll() = viewModelScope.launch {
+        repo.deleteAll()
+    }
+
 
 
     class StockViewModelFactory (private val repo:StockRepository): ViewModelProvider.Factory {

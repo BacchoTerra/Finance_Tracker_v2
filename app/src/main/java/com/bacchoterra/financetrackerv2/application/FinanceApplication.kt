@@ -8,7 +8,7 @@ import kotlinx.coroutines.SupervisorJob
 
 class FinanceApplication :Application(){
 
-    val database by lazy {  FinanceDatabase.getInstance(this)}
+    private val database by lazy {  FinanceDatabase.getInstance(this)}
 
     val stockRepository by lazy { StockRepository(database.stockDao()) }
 

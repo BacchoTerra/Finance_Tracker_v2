@@ -16,6 +16,9 @@ interface StockDao {
     @Delete
     suspend fun delete(stock:Stock)
 
+    @Query("DELETE FROM stock_table")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM stock_table")
     fun selectAll():Flow<List<Stock>>
 
