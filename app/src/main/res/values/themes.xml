@@ -22,15 +22,16 @@
 
     </style>
 
-    <style name="ChatInputLayoutOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="RegularOutlinedInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <item name="boxStrokeColor">@color/secondaryColorVariant</item>
-        <item name="hintTextColor">@color/secondaryColorVariant</item> <!-- For some reason, this change only the hint color when focusable focusable..-->
-        <item name="android:textColorHint">@color/secondaryColorVariant</item> <!-- For some reason, this change the hint color when not focusable..-->
+        <item name="boxStrokeColor">@color/input_layout_outlined_stroke_color_list</item>
+        <item name="hintTextColor">@color/secondaryColor</item>
+        <item name="boxStrokeErrorColor">@color/error_color</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
 
     </style>
 
 
-
-
+    <color name="error_color">#CE3226</color>
+    <color name="hintTextColor">#C2C2C2</color>
 </resources>

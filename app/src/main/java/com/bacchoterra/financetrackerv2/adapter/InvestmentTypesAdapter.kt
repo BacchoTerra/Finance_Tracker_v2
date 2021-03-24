@@ -1,15 +1,18 @@
 package com.bacchoterra.financetrackerv2.adapter
 
 import android.app.Activity
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.model.InvestmentTypes
+import com.bacchoterra.financetrackerv2.view.StocksActivity
 
 class InvestmentTypesAdapter(private val activity: Activity) :
     RecyclerView.Adapter<InvestmentTypesAdapter.MyViewHolder>() {
@@ -33,7 +36,7 @@ class InvestmentTypesAdapter(private val activity: Activity) :
 
         val investmentTypes = listOfItems[position]
 
-        bindLayout(holder,investmentTypes)
+        bindLayout(holder, investmentTypes)
 
     }
 
@@ -43,25 +46,42 @@ class InvestmentTypesAdapter(private val activity: Activity) :
 
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val imageView = view.findViewById<ImageView>(R.id.row_investment_type_imageView)
-        val txtType = view.findViewById<TextView>(R.id.row_investment_type_txtType)
+        val rootLayout: FrameLayout = view.findViewById(R.id.row_investment_type_rootLayout)
+        val imageView: ImageView = view.findViewById(R.id.row_investment_type_imageView)
+        val txtType: TextView = view.findViewById(R.id.row_investment_type_txtType)
 
     }
 
-    private fun bindLayout(holder:MyViewHolder,investmentTypes: InvestmentTypes){
+    private fun bindLayout(holder: MyViewHolder, investmentTypes: InvestmentTypes) {
 
         holder.imageView.setImageResource(investmentTypes.imageRes)
+        holder.imageView.imageTintList =
+            ColorStateList.valueOf(activity.resources.getColor(R.color.textColor))
 
-        when(investmentTypes.type) {
+        when (investmentTypes.type) {
 
-            InvestmentTypes.STOCK_TYPE -> holder.txtType.text = activity.getString(R.string.stock_type)
-            InvestmentTypes.FIXED_TYPE -> holder.txtType.text = activity.getString(R.string.fixed_type)
-            InvestmentTypes.FUNDS_TYPE -> holder.txtType.text = activity.getString(R.string.fund_type)
+            InvestmentTypes.STOCK_TYPE -> holder.txtType.text =
+                activity.getString(R.string.stock_type)
+            InvestmentTypes.FIXED_TYPE -> holder.txtType.text =
+                activity.getString(R.string.fixed_type)
+            InvestmentTypes.FUNDS_TYPE -> holder.txtType.text =
+                activity.getString(R.string.fund_type)
 
 
         }
 
-        holder.imageView.imageTintList = ColorStateList.valueOf(activity.resources.getColor(R.color.textColor))
+        holder.rootLayout.setOnClickListener {
+
+            when (investmentTypes.type) {
+
+                InvestmentTypes.STOCK_TYPE -> {
+                    activity.startActivity(Intent(activity.baseContext, StocksActivity::class.java))
+                }
+
+
+            }
+
+        }
 
 
     }

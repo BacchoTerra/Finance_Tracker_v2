@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/btm_nav_main_menu"
+        app:menu="@menu/menu_btm_nav_main_menu"
         android:background="@color/mainBackgroundColor"
         app:itemIconTint="@color/btm_nav_color_list"
         app:elevation="0dp"

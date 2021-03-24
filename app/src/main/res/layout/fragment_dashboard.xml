@@ -14,115 +14,106 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <TextView
-            android:id="@+id/fragment_dashboard_txtWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/textColor"
-            android:textSize="14sp"
+        <View
+            android:id="@+id/graph"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:background="#456"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Olá, Bruno" />
-
-        <TextView
-            android:id="@+id/fragment_dashboard_titleTotalInvested"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/textColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/total_invested"
-            app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_txtWelcome"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_txtWelcome" />
-
-        <TextView
-            android:id="@+id/fragment_dashboard_txtTotalInvested"
-            android:layout_width="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/textColor"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="R$ 30,150.50"
-            app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_titleTotalInvested"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_titleTotalInvested" />
+            />
 
         <View
             android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:background="@color/primaryColorDark"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape_round_corners_primary_dark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_txtTotalInvested"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_txtTotalInvested" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/graph" />
 
         <TextView
-            android:id="@+id/fragment_dashboard_titleTotalProfit"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            android:text="@string/total_invested"
+            android:fontFamily="@font/roboto"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="R$ 1500.00" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
             android:text="@string/total_profit"
             android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_txtTotalInvested"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/view" />
 
         <TextView
-            android:id="@+id/fragment_dashboard_txtTotalProfit"
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:textColor="@color/textColor"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:text="R$ 1500.00" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            app:layout_constraintGuide_percent=".5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="R$ 30,150.50"
-            app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_titleTotalProfit"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_titleTotalProfit" />
+            android:orientation="vertical" />
 
-        <TextView
-            android:id="@+id/fragment_dashboard_titleMonthlyProfit"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/fragment_dashboard_stock_container"
+            layout="@layout/view_dashboard_last_item"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/monthly_profits"
-            android:textColor="@color/secondaryColor"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_txtTotalProfit"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_txtTotalProfit" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/purple_200"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_titleMonthlyProfit" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_dashboard_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

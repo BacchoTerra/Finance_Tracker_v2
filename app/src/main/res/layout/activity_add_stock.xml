@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackgroundColor"
+    tools:context=".view.AddStockActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainBackgroundColor"
+        tools:context=".view.AddStockActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/activity_add_stock_appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/activity_add_stock_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/mainBackgroundColor" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtStockInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/stock_information"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_appBarLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutName"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/Name"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockInfo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutQuantity"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/quantity"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_add_stock_inputLayoutName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/activity_add_stock_inputLayoutName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_InputLayoutType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/operation_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutDate"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_InputLayoutType">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutPrice"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/value"
+            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutDate"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutDate"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutDate">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtOptionalInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/optional_information"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockInfo"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutPrice" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutBroker"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/Broker"
+            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutPrice"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutPrice"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtOptionalInfo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editBroker"
+                android:layout_width="match_parent"
+                android:inputType="textPersonName"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutExpectedTime"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/expected_invested_time"
+            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutBroker"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutBroker"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutBroker">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editExpectedTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutTechnique"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/technique_used"
+            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutExpectedTime"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutExpectedTime"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutExpectedTime">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editTechnique"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_btn_attractive"
+            android:text="@string/save"
+            android:textColor="@color/textColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutTechnique" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

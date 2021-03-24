@@ -41,4 +41,19 @@
     <string name="stock_type">Renda variável</string>
     <string name="fund_type">Fundos</string>
     <string name="hello_message">Olá, %1$s</string>
+    <string name="add">Adicionar</string>
+    <string name="oper_o_comprada">Operação comprada</string>
+    <string name="opera_o_vendida">Operação vendida</string>
+    <string name="quantity">Quantidade</string>
+    <string name="Name">Nome</string>
+    <string name="Date">Data</string>
+    <string name="Broker">Corretora</string>
+    <string name="expected_invested_time">Tempo esperado de investimento</string>
+    <string name="technique_used">Técnica de avaliação</string>
+    <string name="value">Valor</string>
+    <string name="ltima_renda_v_riavel">Última renda váriavel</string>
+    <string name="ver_todas">Ver todas</string>
+    <string name="optional_information">Informações opcionais</string>
+    <string name="stock_information">Informações do ativo</string>
+    <string name="operation_type">Tipo da opreção</string>
 </resources>

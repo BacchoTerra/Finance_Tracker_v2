@@ -81,5 +81,8 @@ dependencies {
     //Json converter
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    //https://github.com/BlacKCaT27/CurrencyEditText
+    implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
+
 
 }
