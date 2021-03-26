@@ -22,4 +22,10 @@
     <color name="btm_nav_checked_icon">@color/secondaryColorVariant</color>
     <color name="btm_nav_unchecked_icon">#C4C4C4</color>
 
+    <color name="inputLayoutEnabledColor">#6C63FF</color>
+    <color name="inputLayoutDisabledColor">#7975A8</color>
+
+    <color name="error_color">#CE3226</color>
+    <color name="hintTextColor">#C2C2C2</color>
+
 </resources>

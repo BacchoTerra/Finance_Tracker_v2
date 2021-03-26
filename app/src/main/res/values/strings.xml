@@ -56,4 +56,20 @@
     <string name="optional_information">Informações opcionais</string>
     <string name="stock_information">Informações do ativo</string>
     <string name="operation_type">Tipo da opreção</string>
+    <string name="min_quantity">Mínimo de 0.1</string>
+    <string name="obligatory_field">Campo obrigatorio</string>
+    <string name="min_value">Mínimo de R$ 1.00</string>
+    <string name="basic_information">Informações básicas</string>
+    <string name="add_basic_information">Adicione as informações básicas da operação</string>
+    <string name="stock_name">Nome da ação</string>
+    <string name="add_broker">%1$s Adicionar corretora</string>
+    <string name="add_expected_time">%1$s Adicionar tempo de investimento</string>
+    <string name="add_technique">%1$s Adicionar técninca de análise</string>
+    <string name="ecpected_time">Tempo esperado</string>
+    <string name="stock_technique">Técninca de análise</string>
+    <string name="select_stock_type">Selecione um tipo</string>
+    <string name="hint_stock_name">IBOV</string>
+    <string name="hint_date_input">dd/MM/yyyy</string>
+    <string name="hint_money_input">R$ xxx.xx</string>
+    <string name="hint_quantity_input">250</string>
 </resources>

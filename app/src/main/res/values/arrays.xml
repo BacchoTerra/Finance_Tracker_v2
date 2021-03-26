@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="stock_operation_types">
+
+
+        <item>@string/oper_o_comprada</item>
+        <item>@string/opera_o_vendida</item>
+
+
+    </string-array>
+
+
+
+</resources>

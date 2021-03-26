@@ -4,8 +4,10 @@
     <corners
         android:radius="11dp"/>
 
-    <solid
-        android:color="@color/chatGreenColor"/>
+    <gradient
+        android:startColor="@color/secondaryColorVariant"
+        android:endColor="@color/purple_500"
+        android:angle="0"/>
 
 
 </shape>

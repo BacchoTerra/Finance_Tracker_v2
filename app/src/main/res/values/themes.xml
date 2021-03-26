@@ -9,7 +9,7 @@
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryColorVariant</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primaryColorDark</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -31,7 +31,24 @@
 
     </style>
 
+    <style name="DropDownOutlinedInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-    <color name="error_color">#CE3226</color>
-    <color name="hintTextColor">#C2C2C2</color>
+        <item name="boxStrokeColor">@color/input_layout_outlined_stroke_color_list</item>
+        <item name="hintTextColor">@color/secondaryColor</item>
+        <item name="boxStrokeErrorColor">@color/error_color</item>
+        <item name="hintEnabled">false</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="boxBackgroundColor">@color/mainBackgroundColor</item>
+        <item name="endIconTint">@color/textColor</item>
+
+    </style>
+
+    <style name="RegularOutlinedInputLayout.EditText" parent="Widget.AppCompat.EditText">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+        <item name="android:textCursorDrawable">@drawable/shape_cursor_white</item>
+
+    </style>
 </resources>

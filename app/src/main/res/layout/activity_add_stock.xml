@@ -13,117 +13,101 @@
         android:background="@color/mainBackgroundColor"
         tools:context=".view.AddStockActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/activity_add_stock_appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/activity_add_stock_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/mainBackgroundColor" />
-        </com.google.android.material.appbar.AppBarLayout>
-
         <TextView
-            android:id="@+id/activity_add_stock_txtStockInfo"
+            android:id="@+id/activity_add_stock_txtBasicInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/stock_information"
+            android:text="@string/basic_information"
             android:textColor="@color/textColor"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_appBarLayout" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtAddBasicInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/add_basic_information"
+            android:textColor="@color/hintTextColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtBasicInfo"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtBasicInfo" />
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtStockType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/operation_type"
+            android:textColor="@color/textColor"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddBasicInfo"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtAddBasicInfo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutType"
+            style="@style/DropDownOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockType"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockType">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/activity_add_stock_editType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_stock_type"
+                android:inputType="none"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtStockName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/stock_name"
+            android:textColor="@color/textColor"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockType"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutType" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_add_stock_inputLayoutName"
             style="@style/RegularOutlinedInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:hint="@string/Name"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockInfo">
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockName"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockName">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_stock_editName"
+                style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_stock_name"
+                android:imeOptions="actionNext"
                 android:inputType="textPersonName"
-                android:textColor="@color/textColor" />
+                android:maxLength="6"
+                android:nextFocusRight="@id/activity_add_stock_editDate" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_inputLayoutQuantity"
-            style="@style/RegularOutlinedInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/quantity"
-            app:layout_constraintBottom_toBottomOf="@+id/activity_add_stock_inputLayoutName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/activity_add_stock_inputLayoutName">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_add_stock_editQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textColor="@color/textColor" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_InputLayoutType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/operation_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutName">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_add_stock_editType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColor" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_inputLayoutDate"
-            style="@style/RegularOutlinedInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/Date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_InputLayoutType">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_add_stock_editDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:textColor="@color/textColor" />
-        </com.google.android.material.textfield.TextInputLayout>
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
@@ -132,113 +116,235 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent=".5" />
 
+        <TextView
+            android:id="@+id/activity_add_stock_txtStockDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/Date"
+            android:textColor="@color/textColor"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_add_stock_txtStockName"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txtStockName" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutDate"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="34dp"
+            app:endIconDrawable="@drawable/ic_baseline_date_range_24"
+            app:endIconMode="custom"
+            app:endIconTint="@color/textColor"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_add_stock_inputLayoutName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockDate"
+            app:layout_constraintTop_toTopOf="@+id/activity_add_stock_inputLayoutName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editDate"
+                style="@style/RegularOutlinedInputLayout.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_date_input"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtStockPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/value"
+            android:textColor="@color/textColor"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockName"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutName" />
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_add_stock_inputLayoutPrice"
             style="@style/RegularOutlinedInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/value"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutDate"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutDate"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutDate">
-
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockPrice">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_stock_editPrice"
+                style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:textColor="@color/textColor" />
+                android:hint="@string/hint_money_input"
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <View
+            android:id="@+id/view3"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_round_corners_second_variant"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_add_stock_inputLayoutPrice"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockPrice"
+            app:layout_constraintTop_toTopOf="@+id/activity_add_stock_inputLayoutPrice" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="@+id/view3"
+            app:srcCompat="@drawable/ic_baseline_attach_money_24"
+            app:tint="@color/textColor"
+            tools:ignore="ContentDescription" />
+
         <TextView
-            android:id="@+id/activity_add_stock_txtOptionalInfo"
+            android:id="@+id/activity_add_stock_txtStockQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/optional_information"
+            android:text="@string/quantity"
             android:textColor="@color/textColor"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockInfo"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockPrice"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutPrice" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_inputLayoutBroker"
+            android:id="@+id/activity_add_stock_inputLayoutQuantity"
             style="@style/RegularOutlinedInputLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:hintEnabled="false"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockQuantity"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockQuantity">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_add_stock_editQuantity"
+                style="@style/RegularOutlinedInputLayout.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_quantity_input"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_add_stock_txtAddBroker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/Broker"
+            android:textColor="@color/secondaryColorVariant"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockQuantity"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutQuantity"
+            tools:text="@string/add_broker" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_add_stock_inputLayoutAddBroker"
+            style="@style/RegularOutlinedInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutPrice"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutPrice"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtOptionalInfo">
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddBroker"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtAddBroker">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_stock_editBroker"
+                style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
-                android:inputType="textPersonName"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor" />
+                android:hint="@string/Broker"
+                android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/activity_add_stock_txtAddExpectedTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondaryColorVariant"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddBroker"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutAddBroker"
+            tools:text="@string/add_expected_time" />
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_inputLayoutExpectedTime"
+            android:id="@+id/activity_add_stock_inputLayoutAddExpectedTime"
             style="@style/RegularOutlinedInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/expected_invested_time"
-            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutBroker"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutBroker"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutBroker">
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutAddBroker"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddExpectedTime"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtAddExpectedTime">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_stock_editExpectedTime"
+                style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:textColor="@color/textColor" />
+                android:hint="@string/ecpected_time"
+                android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/activity_add_stock_txtAddTechnique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondaryColorVariant"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddExpectedTime"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutAddExpectedTime"
+            tools:text="@string/add_technique" />
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_inputLayoutTechnique"
+            android:id="@+id/activity_add_stock_inputLayoutAddTechnique"
             style="@style/RegularOutlinedInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/technique_used"
-            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutExpectedTime"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_inputLayoutExpectedTime"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutExpectedTime">
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutAddExpectedTime"
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddTechnique"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtAddTechnique">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_stock_editTechnique"
+                style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/textColor" />
+                android:hint="@string/stock_technique"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button"
+            android:id="@+id/activity_add_stock_btnSave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/shape_btn_attractive"
             android:text="@string/save"
             android:textColor="@color/textColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutTechnique" />
-
+            app:layout_constraintTop_toBottomOf="@id/activity_add_stock_inputLayoutAddTechnique" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
