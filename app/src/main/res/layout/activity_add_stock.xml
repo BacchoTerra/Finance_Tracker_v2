@@ -143,13 +143,15 @@
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockDate"
             app:layout_constraintTop_toTopOf="@+id/activity_add_stock_inputLayoutName">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.santalu.maskara.widget.MaskEditText
                 android:id="@+id/activity_add_stock_editDate"
                 style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_date_input"
-                android:inputType="date" />
+                android:inputType="date"
+                app:mask="##/##/####"
+                app:maskCharacter="#" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -183,7 +185,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_money_input"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <View
@@ -232,7 +235,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_add_stock_editQuantity"
                 style="@style/RegularOutlinedInputLayout.EditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_quantity_input"
                 android:inputType="numberDecimal" />
@@ -286,6 +289,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:visibility="gone"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_inputLayoutAddBroker"
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddExpectedTime"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtAddExpectedTime">

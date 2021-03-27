@@ -4,12 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.databinding.ActivityAddStockBinding
+import com.bacchoterra.financetrackerv2.model.Stock
+import com.bacchoterra.financetrackerv2.model.StockHistory
+import com.blackcat.currencyedittext.CurrencyEditText
 import com.google.android.material.textfield.TextInputEditText
+import com.santalu.maskara.widget.MaskEditText
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddStockActivity : AppCompatActivity() {
 
@@ -18,81 +25,207 @@ class AddStockActivity : AppCompatActivity() {
     private lateinit var editName: TextInputEditText
     private lateinit var editQuantity: TextInputEditText
     private lateinit var editType: AutoCompleteTextView
-    private lateinit var editDate: TextInputEditText
+    private lateinit var editDate: MaskEditText
     private lateinit var editPrice: TextInputEditText
+
+
+    private lateinit var editBroker: TextInputEditText
+    private lateinit var editPExpectedTime: TextInputEditText
+    private lateinit var editTechinique: TextInputEditText
+
+
+    //Stock components
+    private lateinit var stock: Stock
+    private var type = 5
+    private lateinit var name: String
+    private lateinit var date: String
+    private var price = 0f
+    private var quantity = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binder = ActivityAddStockBinding.inflate(layoutInflater)
         setContentView(binder.root)
-        initTypeDropdownMenu()
-        binder.activityAddStockTxtAddBasicInfo.requestFocus()
+        initViews()
 
+        initTypeDropdownMenu()
         handleHiddenLayouts()
+
+        binder.activityAddStockBtnSave.setOnClickListener {
+
+
+            if (isAllFieldsOk()) {
+                buildAndSendStockAsResult()
+                Toast.makeText(this, "all ok", Toast.LENGTH_SHORT).show()
+            } else {
+                findWrongInputField()
+            }
+
+        }
 
     }
 
-    private fun initTypeDropdownMenu(){
+    private fun initViews() {
 
-        val items = resources.getStringArray(R.array.stock_operation_types)
-        val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,items)
+        editType = binder.activityAddStockEditType
+        editName = binder.activityAddStockEditName
+        editDate = binder.activityAddStockEditDate
+        editPrice = binder.activityAddStockEditPrice
+        editQuantity = binder.activityAddStockEditQuantity
+
+        editBroker = binder.activityAddStockEditBroker
+        editPExpectedTime = binder.activityAddStockEditExpectedTime
+        editTechinique = binder.activityAddStockEditTechnique
+
+        binder.activityAddStockTxtAddBasicInfo.requestFocus()
+
+    }
+
+    private fun initTypeDropdownMenu() {
+
+        val items =
+            resources.getStringArray(R.array.stock_operation_types) // 0 = comprada -- 1 = vendida
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
 
         binder.activityAddStockEditType.setAdapter(adapter)
 
+        editType.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
+
+            type =
+                i //automatically set the stock type to corresponding type numbers on Stock data class
+
+
+        }
+
     }
 
-    private fun handleHiddenLayouts(){
+    private fun isAllFieldsOk(): Boolean {
+
+        name = editName.text.toString()
+        date = editDate.text.toString()
+        price =
+            if (editPrice.text.toString().isNotBlank()) editPrice.text.toString().toFloat() else 0f
+        quantity = if (editQuantity.text.toString().isNotBlank()) editQuantity.text.toString()
+            .toInt() else 0
+
+
+        return type < 1 && name.isNotBlank() && date.isNotBlank() && date.length == 10 && price > 0 && quantity > 0
+
+
+    }
+
+    private fun findWrongInputField() {
+
+        when {
+            type > 1 -> editType.error =
+                getString(R.string.error_invalid_stock_type)
+            name.isBlank() -> editName.error =
+                getString(R.string.error_stock_name)
+            date.isBlank() || date.length < 10 -> editDate.error =
+                getString(R.string.error_invalid_date)
+            price <= 0 -> editPrice.error =
+                getString(R.string.error_invalid_stock_price)
+            quantity <= 0 -> editQuantity.error =
+                getString(R.string.error_invalid_stock_quantity)
+
+
+        }
+
+
+    }
+
+    private fun buildAndSendStockAsResult() {
+
+        val historyList = listOf(StockHistory(getStockDate()!!, type, quantity))
+
+        val broker = if (editBroker.text.toString()
+                .isNotBlank()
+        ) editTechinique.text.toString() else null
+
+        val expectedTime = if (editPExpectedTime.text.toString()
+                .isNotBlank()
+        ) editPExpectedTime.text.toString() else null
+
+        val techniqueUsed = if (editTechinique.text.toString()
+                .isNotBlank()
+        ) editTechinique.text.toString() else null
+
+        val stock = Stock(
+            name,
+            getStockDate()!!,
+            quantity,
+            price,
+            quantity * price,
+            type,
+            historyList,
+            expectedTimeInvested = expectedTime,
+            techniqueUsed = techniqueUsed,
+            broker = broker
+        )
+
+    }
+
+    private fun getStockDate(): Long? {
+
+        //TODO: handle day,month, and year inputs manually to prevent user from using absurd dates
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+        val date = sdf.parse(date)
+
+        return date?.time
+
+    }
+
+    private fun handleHiddenLayouts() {
 
         val txtAddBroker = binder.activityAddStockTxtAddBroker
         val txtAddExpectedTime = binder.activityAddStockTxtAddExpectedTime
         val txtAddTechnique = binder.activityAddStockTxtAddTechnique
 
-        txtAddBroker.text = getString(R.string.add_broker,"+")
-        txtAddExpectedTime.text = getString(R.string.add_expected_time,"+")
-        txtAddTechnique.text = getString(R.string.add_technique,"+")
+        txtAddBroker.text = getString(R.string.add_broker, "+")
+        txtAddExpectedTime.text = getString(R.string.add_expected_time, "+")
+        txtAddTechnique.text = getString(R.string.add_technique, "+")
 
         val inputLayoutBroker = binder.activityAddStockInputLayoutAddBroker
         val inputLayoutExpectedTime = binder.activityAddStockInputLayoutAddExpectedTime
         val inputLayoutTechnique = binder.activityAddStockInputLayoutAddTechnique
 
-        txtAddBroker.setOnClickListener{
+        txtAddBroker.setOnClickListener {
 
-            if (inputLayoutBroker.visibility == View.GONE){
+            if (inputLayoutBroker.visibility == View.GONE) {
                 inputLayoutBroker.visibility = View.VISIBLE
                 txtAddBroker.text = getString(R.string.add_broker, "-")
-            }else{
+            } else {
                 inputLayoutBroker.visibility = View.GONE
                 txtAddBroker.text = getString(R.string.add_broker, "+")
             }
 
         }
 
-        txtAddExpectedTime.setOnClickListener{
+        txtAddExpectedTime.setOnClickListener {
 
-            if (inputLayoutExpectedTime.visibility == View.GONE){
+            if (inputLayoutExpectedTime.visibility == View.GONE) {
                 inputLayoutExpectedTime.visibility = View.VISIBLE
                 txtAddExpectedTime.text = getString(R.string.add_expected_time, "-")
-            }else{
+            } else {
                 inputLayoutExpectedTime.visibility = View.GONE
                 txtAddExpectedTime.text = getString(R.string.add_expected_time, "+")
             }
 
         }
 
-        txtAddTechnique.setOnClickListener{
+        txtAddTechnique.setOnClickListener {
 
-            if (inputLayoutTechnique.visibility == View.GONE){
+            if (inputLayoutTechnique.visibility == View.GONE) {
                 inputLayoutTechnique.visibility = View.VISIBLE
                 txtAddTechnique.text = getString(R.string.add_technique, "-")
-            }else{
+            } else {
                 inputLayoutTechnique.visibility = View.GONE
                 txtAddTechnique.text = getString(R.string.add_technique, "+")
 
             }
 
         }
-
-
 
 
     }

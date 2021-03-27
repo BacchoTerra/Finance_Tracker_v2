@@ -10,6 +10,7 @@ data class Stock(
     val quantity: Int,
     val averagePrice: Float,
     val totalSpent: Float,
+    val type:Int,
     val history:List<StockHistory>,
     val expectedTimeInvested: String? = null,
     val finished: Boolean = false,
@@ -19,8 +20,12 @@ data class Stock(
     val finalPrice: Float? = null,
     val profit: Float? = null,
     @PrimaryKey(autoGenerate = true) val id: Int =0
-
 ) {
+
+    companion object {
+        private const val TYPE_BUY = 0
+        private const val TYPE_SELL = 1
+    }
 
 
 }

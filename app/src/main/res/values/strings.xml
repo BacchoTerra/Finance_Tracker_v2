@@ -72,4 +72,9 @@
     <string name="hint_date_input">dd/MM/yyyy</string>
     <string name="hint_money_input">R$ xxx.xx</string>
     <string name="hint_quantity_input">250</string>
+    <string name="error_stock_name">Nome inválido</string>
+    <string name="error_invalid_stock_type">Selecione um tipo de operação</string>
+    <string name="error_invalid_date">Insira uma data válida</string>
+    <string name="error_invalid_stock_price">Insira um valor maior que R$ 0.00</string>
+    <string name="error_invalid_stock_quantity">Insira um número maior que 0</string>
 </resources>
