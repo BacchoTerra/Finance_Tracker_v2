@@ -79,4 +79,12 @@
     <string name="error_invalid_stock_quantity">Insira um número maior que 0</string>
     <string name="x_papeis">%1$d papéis</string>
     <string name="money_symbol_price">R$ %1$f</string>
+    <string name="first_buy">Primeira compra</string>
+    <string name="history">História</string>
+    <string name="broker_and_type">%1$s ,%2$s</string>
+    <string name="type_only">%1$s</string>
+    <string name="quant_x">Quant. %1$d</string>
+    <string name="not_defined">Não definido</string>
+    <string name="bought">Compra</string>
+    <string name="sold">Venda</string>
 </resources>

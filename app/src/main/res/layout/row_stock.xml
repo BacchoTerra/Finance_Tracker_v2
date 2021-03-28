@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/mainBackgroundColor"
+    android:id="@+id/row_stock_rootLayout"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginVertical="8dp"
-    android:layout_height="wrap_content">
+    android:background="@color/mainBackgroundColor">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/row_stock_image_view"
@@ -28,22 +29,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto"
-        tools:text="ITUB4"
         android:textColor="@color/textColor"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/row_stock_image_view"
-        app:layout_constraintTop_toTopOf="@+id/row_stock_image_view" />
+        app:layout_constraintTop_toTopOf="@+id/row_stock_image_view"
+        tools:text="ITUB4" />
 
     <TextView
         android:id="@+id/row_stock_txtBroker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
-        tools:text="c6 bank"
         android:textColor="@color/textColor"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/row_stock_txtName"
-        app:layout_constraintTop_toBottomOf="@+id/row_stock_txtName" />
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_txtName"
+        tools:text="c6 bank" />
 
     <TextView
         android:id="@+id/row_stock_txt_totalSpent"
@@ -51,13 +52,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto"
-        tools:text="R$ 1500.00"
         android:textColor="@color/textColor"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/row_stock_txtName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="R$ 1500.00" />
 
     <TextView
         android:id="@+id/row_stock_txtQuantity"
@@ -67,9 +68,9 @@
         android:background="@drawable/shape_round_corners_primary_dark"
         android:fontFamily="@font/roboto"
         android:padding="4dp"
-        tools:text="2 papéis"
         android:textColor="@color/textColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/row_stock_txt_totalSpent"
-        app:layout_constraintTop_toBottomOf="@+id/row_stock_txt_totalSpent" />
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_txt_totalSpent"
+        tools:text="2 papéis" />
 </androidx.constraintlayout.widget.ConstraintLayout>

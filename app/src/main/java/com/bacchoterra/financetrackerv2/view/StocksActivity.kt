@@ -28,6 +28,9 @@ class StocksActivity : AppCompatActivity() {
 
     //Stock components
     private lateinit var stock:Stock
+    companion object {
+        const val KEY_RECYCLER_STOCK = "RECYCLER_STOCK"
+    }
 
     //ViewModel
     private val viewModel:StockViewModel by viewModels {

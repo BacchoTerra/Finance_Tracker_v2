@@ -1,6 +1,7 @@
 package com.bacchoterra.financetrackerv2.adapter
 
 import android.app.Activity
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.model.Stock
+import com.bacchoterra.financetrackerv2.view.ShowStockActivity
+import com.bacchoterra.financetrackerv2.view.StocksActivity
 
 class StockAdapter(val activity: Activity) :
     ListAdapter<Stock, StockAdapter.MyViewHolder>(StockComparator()) {
@@ -95,16 +98,28 @@ class StockAdapter(val activity: Activity) :
 
         }
 
+        holder.rootLayout.setOnClickListener{
+
+            val intent = Intent(activity,ShowStockActivity::class.java)
+            intent.putExtra(StocksActivity.KEY_RECYCLER_STOCK,stock)
+            activity.startActivity(intent)
+
+        }
+
+
+
     }
 
 
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val imageStatus = view.findViewById<ImageView>(R.id.row_stock_image_view)
-        val txtName = view.findViewById<TextView>(R.id.row_stock_txtName)
-        val txtBroker = view.findViewById<TextView>(R.id.row_stock_txtBroker)
-        val txtTotalSpent = view.findViewById<TextView>(R.id.row_stock_txt_totalSpent)
-        val txtQuantity = view.findViewById<TextView>(R.id.row_stock_txtQuantity)
+
+        val rootLayout: ViewGroup = view.findViewById(R.id.row_stock_rootLayout)
+        val imageStatus: ImageView = view.findViewById(R.id.row_stock_image_view)
+        val txtName: TextView = view.findViewById(R.id.row_stock_txtName)
+        val txtBroker: TextView = view.findViewById(R.id.row_stock_txtBroker)
+        val txtTotalSpent: TextView = view.findViewById(R.id.row_stock_txt_totalSpent)
+        val txtQuantity: TextView = view.findViewById(R.id.row_stock_txtQuantity)
 
 
     }
