@@ -41,38 +41,16 @@
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtBasicInfo"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtBasicInfo" />
 
-        <TextView
-            android:id="@+id/activity_add_stock_txtStockType"
+        <CheckBox
+            android:id="@+id/activity_add_stock_checkBoxSellOp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/operation_type"
+            android:text="@string/opera_o_vendida"
             android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddBasicInfo"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtAddBasicInfo" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_add_stock_inputLayoutType"
-            style="@style/DropDownOutlinedInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockType"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockType">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/activity_add_stock_editType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/select_stock_type"
-                android:inputType="none"
-                android:textColor="@color/textColor"
-                android:textColorHint="@color/textColor" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/activity_add_stock_txtStockName"
@@ -82,8 +60,8 @@
             android:fontFamily="@font/roboto"
             android:text="@string/stock_name"
             android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockType"
-            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutType" />
+            app:layout_constraintStart_toStartOf="@+id/activity_add_stock_checkBoxSellOp"
+            app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_checkBoxSellOp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_add_stock_inputLayoutName"

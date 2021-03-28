@@ -1,13 +1,11 @@
 package com.bacchoterra.financetrackerv2.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.databinding.ActivityAddStockBinding
 import com.bacchoterra.financetrackerv2.model.Stock
@@ -24,10 +22,9 @@ class AddStockActivity : AppCompatActivity() {
     private lateinit var binder: ActivityAddStockBinding
     private lateinit var editName: TextInputEditText
     private lateinit var editQuantity: TextInputEditText
-    private lateinit var editType: AutoCompleteTextView
+    private lateinit var checkBoxIsSold: CheckBox
     private lateinit var editDate: MaskEditText
     private lateinit var editPrice: TextInputEditText
-
 
     private lateinit var editBroker: TextInputEditText
     private lateinit var editPExpectedTime: TextInputEditText
@@ -36,11 +33,14 @@ class AddStockActivity : AppCompatActivity() {
 
     //Stock components
     private lateinit var stock: Stock
-    private var type = 5
+    private var isSold = false
     private lateinit var name: String
     private lateinit var date: String
     private var price = 0f
     private var quantity = 0
+    companion object{
+      const val KEY_STOCK = "STOCK"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,6 @@ class AddStockActivity : AppCompatActivity() {
         setContentView(binder.root)
         initViews()
 
-        initTypeDropdownMenu()
         handleHiddenLayouts()
 
         binder.activityAddStockBtnSave.setOnClickListener {
@@ -56,7 +55,6 @@ class AddStockActivity : AppCompatActivity() {
 
             if (isAllFieldsOk()) {
                 buildAndSendStockAsResult()
-                Toast.makeText(this, "all ok", Toast.LENGTH_SHORT).show()
             } else {
                 findWrongInputField()
             }
@@ -67,7 +65,7 @@ class AddStockActivity : AppCompatActivity() {
 
     private fun initViews() {
 
-        editType = binder.activityAddStockEditType
+        checkBoxIsSold = binder.activityAddStockCheckBoxSellOp
         editName = binder.activityAddStockEditName
         editDate = binder.activityAddStockEditDate
         editPrice = binder.activityAddStockEditPrice
@@ -81,35 +79,17 @@ class AddStockActivity : AppCompatActivity() {
 
     }
 
-    private fun initTypeDropdownMenu() {
-
-        val items =
-            resources.getStringArray(R.array.stock_operation_types) // 0 = comprada -- 1 = vendida
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
-
-        binder.activityAddStockEditType.setAdapter(adapter)
-
-        editType.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-
-            type =
-                i //automatically set the stock type to corresponding type numbers on Stock data class
-
-
-        }
-
-    }
-
     private fun isAllFieldsOk(): Boolean {
 
-        name = editName.text.toString()
-        date = editDate.text.toString()
+        name = editName.text.toString().trim()
+        date = editDate.text.toString().trim()
         price =
             if (editPrice.text.toString().isNotBlank()) editPrice.text.toString().toFloat() else 0f
         quantity = if (editQuantity.text.toString().isNotBlank()) editQuantity.text.toString()
             .toInt() else 0
 
 
-        return type < 1 && name.isNotBlank() && date.isNotBlank() && date.length == 10 && price > 0 && quantity > 0
+        return name.isNotBlank() && date.isNotBlank() && date.length == 10 && price > 0 && quantity > 0
 
 
     }
@@ -117,8 +97,6 @@ class AddStockActivity : AppCompatActivity() {
     private fun findWrongInputField() {
 
         when {
-            type > 1 -> editType.error =
-                getString(R.string.error_invalid_stock_type)
             name.isBlank() -> editName.error =
                 getString(R.string.error_stock_name)
             date.isBlank() || date.length < 10 -> editDate.error =
@@ -136,32 +114,39 @@ class AddStockActivity : AppCompatActivity() {
 
     private fun buildAndSendStockAsResult() {
 
-        val historyList = listOf(StockHistory(getStockDate()!!, type, quantity))
+        val historyList = listOf(StockHistory(getStockDate()!!, checkBoxIsSold.isChecked, quantity))
 
-        val broker = if (editBroker.text.toString()
+        val broker = if (editBroker.text.toString().trim()
                 .isNotBlank()
-        ) editTechinique.text.toString() else null
+        ) editBroker.text.toString() else null
 
-        val expectedTime = if (editPExpectedTime.text.toString()
+        val expectedTime = if (editPExpectedTime.text.toString().trim()
                 .isNotBlank()
         ) editPExpectedTime.text.toString() else null
 
-        val techniqueUsed = if (editTechinique.text.toString()
+        val techniqueUsed = if (editTechinique.text.toString().trim()
                 .isNotBlank()
         ) editTechinique.text.toString() else null
 
         val stock = Stock(
-            name,
+            name.toUpperCase(Locale.ROOT),
             getStockDate()!!,
             quantity,
             price,
             quantity * price,
-            type,
             historyList,
+            isSoldOperation = checkBoxIsSold.isChecked,
             expectedTimeInvested = expectedTime,
             techniqueUsed = techniqueUsed,
             broker = broker
         )
+
+        val intent = Intent().apply {
+            putExtra(KEY_STOCK, stock)
+        }
+
+        setResult(RESULT_OK, intent)
+        finish()
 
     }
 

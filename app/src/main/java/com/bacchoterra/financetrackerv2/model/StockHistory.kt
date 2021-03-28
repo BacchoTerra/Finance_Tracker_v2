@@ -1,11 +1,8 @@
 package com.bacchoterra.financetrackerv2.model
 
-class StockHistory (timeStamp:Long,val operationType:Int,quantity:Int) {
+import java.io.Serializable
 
-    companion object {
+class StockHistory (val timeStamp:Long,val isSoldOperation:Boolean,val quantity:Int) :Serializable{
 
-        const val BUY = 0
-        const val SELL = 1
-    }
 
 }

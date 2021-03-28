@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/mainBackgroundColor"
     android:layout_width="match_parent"
+    android:layout_marginVertical="4dp"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView"
+        android:id="@+id/row_stock_image_view"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -20,7 +21,7 @@
         app:tint="@color/chatGreenColor" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/row_stock_txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -28,22 +29,22 @@
         android:text="ITUB4"
         android:textColor="@color/textColor"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/row_stock_image_view"
+        app:layout_constraintTop_toTopOf="@+id/row_stock_image_view" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/row_stock_txtBroker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:text="c6 bank"
         android:textColor="@color/textColor"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="@+id/row_stock_txtName"
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_txtName" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/row_stock_txt_totalSpent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -52,12 +53,12 @@
         android:textColor="@color/textColor"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_txtName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/row_stock_txtQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -67,6 +68,6 @@
         android:text="2 papéis"
         android:textColor="@color/textColor"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintEnd_toEndOf="@+id/row_stock_txt_totalSpent"
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_txt_totalSpent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.databinding.FragmentDashboardBinding
 import com.bacchoterra.financetrackerv2.utils.SharedPrefsUtil
 import com.bacchoterra.financetrackerv2.view.AddStockActivity
+import com.bacchoterra.financetrackerv2.view.StocksActivity
 
 
 class DashboardFragment : Fragment() {
@@ -42,7 +43,7 @@ class DashboardFragment : Fragment() {
 
         containerLayout.viewDashboardLastTxtSeeMore.setOnClickListener{
 
-            requireActivity().startActivity(Intent(activity,AddStockActivity::class.java))
+            requireActivity().startActivity(Intent(activity,StocksActivity::class.java))
 
         }
 
