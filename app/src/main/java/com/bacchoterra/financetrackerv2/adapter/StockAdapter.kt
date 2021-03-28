@@ -39,8 +39,8 @@ class StockAdapter(val activity: Activity) :
 
         holder.txtName.text = stock.name
         stock.broker.let { holder.txtBroker.text = stock.broker }
-        holder.txtTotalSpent.text = stock.totalSpent.toString()
-        holder.txtQuantity.text = stock.quantity.toString()
+        holder.txtTotalSpent.text = activity.getString(R.string.money_symbol_price,stock.totalSpent)
+        holder.txtQuantity.text = activity.getString(R.string.x_papeis,stock.quantity)
 
 
         when {

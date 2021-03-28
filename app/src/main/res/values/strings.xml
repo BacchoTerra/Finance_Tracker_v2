@@ -77,4 +77,6 @@
     <string name="error_invalid_date">Insira uma data válida</string>
     <string name="error_invalid_stock_price">Insira um valor maior que R$ 0.00</string>
     <string name="error_invalid_stock_quantity">Insira um número maior que 0</string>
+    <string name="x_papeis">%1$d papéis</string>
+    <string name="money_symbol_price">R$ %1$f</string>
 </resources>
