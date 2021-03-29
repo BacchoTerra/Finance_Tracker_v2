@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/mainBackgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/btom_sheet_add_stock_history_txtHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        tools:text="Adicionar compra"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/btom_sheet_add_stock_history_inputPrice"
+        style="@style/RegularOutlinedInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btom_sheet_add_stock_history_txtHeader"
+        app:layout_constraintTop_toBottomOf="@+id/btom_sheet_add_stock_history_txtHeader">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/RegularOutlinedInputLayout.EditText"
+            android:layout_width="match_parent"
+            android:id="@+id/btom_sheet_add_stock_history_editPrice"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/btom_sheet_add_stock_history_inputQuantity"
+        style="@style/RegularOutlinedInputLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/quantity"
+        android:minWidth="80dp"
+        app:layout_constraintStart_toStartOf="@+id/btom_sheet_add_stock_history_inputPrice"
+        app:layout_constraintTop_toBottomOf="@+id/btom_sheet_add_stock_history_inputPrice">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/RegularOutlinedInputLayout.EditText"
+            android:layout_width="wrap_content"
+            android:id="@+id/btom_sheet_add_stock_history_editQuantity"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:minWidth="80dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btom_sheet_add_stock_history_btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/shape_btn_attractive"
+        android:text="@string/save"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btom_sheet_add_stock_history_inputQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/btom_sheet_add_stock_history_inputQuantity" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

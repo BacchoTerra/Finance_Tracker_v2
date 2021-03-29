@@ -3,46 +3,58 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/mainBackgroundColor"
     android:layout_width="match_parent"
+    android:background="@color/mainBackgroundColor"
     android:paddingVertical="8dp"
     android:layout_marginVertical="8dp"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/row_stock_history_txtDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/textColor"
-        android:textSize="12sp"
+    <View
+        android:id="@+id/view2"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_round_corners_second_variant"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_history_txtQuantityAndPrice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="12/06/2008" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/row_stock_history_txtType"
+        android:id="@+id/row_stock_history_txtTypeAndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="12sp"
+        android:layout_marginStart="8dp"
         android:textColor="@color/textColor"
         android:fontFamily="@font/roboto"
-        tools:text="Compra"
-        app:layout_constraintEnd_toStartOf="@+id/row_stock_history_txtQuantity"
-        app:layout_constraintStart_toEndOf="@+id/row_stock_history_txtDate"
-        app:layout_constraintTop_toTopOf="@+id/row_stock_history_txtDate" />
+        android:textSize="14sp"
+        tools:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/row_stock_history_txtQuantity"
+        android:id="@+id/row_stock_history_txtQuantityAndPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/textColor"
+
         android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/row_stock_history_txtTypeAndDate"
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_history_txtTypeAndDate"
+        tools:text="TextView" />
+
+    <TextView
+        android:id="@+id/row_stock_history_txtTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:textColor="@color/textColor"
         android:fontFamily="@font/roboto"
-        tools:text="12"
+        android:textSize="12sp"
+        tools:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_history_txtTypeAndDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/row_stock_history_txtType" />
+        app:layout_constraintTop_toTopOf="@+id/row_stock_history_txtTypeAndDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

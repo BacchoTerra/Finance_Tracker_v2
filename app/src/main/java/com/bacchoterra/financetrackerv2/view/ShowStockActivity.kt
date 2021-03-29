@@ -118,6 +118,17 @@ class ShowStockActivity : AppCompatActivity() {
 
         }
 
+        bind.fabAdd.setOnClickListener {
+
+            openBottomSheet(StockOperationBtmSheet.ADD_OPERATION)
+
+        }
+
+        bind.fabRemove.setOnClickListener {
+
+            openBottomSheet(StockOperationBtmSheet.REMOVE_OPERATION)
+        }
+
 
     }
 

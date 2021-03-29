@@ -87,4 +87,9 @@
     <string name="not_defined">Não definido</string>
     <string name="bought">Compra</string>
     <string name="sold">Venda</string>
+    <string name="Add">Adicionar</string>
+    <string name="add_buy">Adicionar compra</string>
+    <string name="add_sell">Adicionar venda</string>
+    <string name="stock_history_type_date">%1$s (%2$s)</string>
+    <string name="stock_history_quant_price">%1$d papéis de %2$f</string>
 </resources>

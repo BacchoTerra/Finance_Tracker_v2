@@ -12,7 +12,7 @@ import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.model.StockHistory
 import com.bacchoterra.financetrackerv2.utils.DateUtil
 
-class StockHistoryAdapter(private val list:List<StockHistory>,private val activity: Activity) :
+class StockHistoryAdapter(private val list: List<StockHistory>, private val activity: Activity) :
     RecyclerView.Adapter<StockHistoryAdapter.MyViewHolder>() {
 
 
@@ -27,23 +27,28 @@ class StockHistoryAdapter(private val list:List<StockHistory>,private val activi
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        bindStockHistory(holder,list[position])
+        bindStockHistory(holder, list[position])
 
 
     }
 
     private fun bindStockHistory(holder: MyViewHolder, stockHistory: StockHistory) {
 
-        holder.txtDate.text = DateUtil.formatDate(stockHistory.timeStamp, DateUtil.DEFAULT_PATTERN)
+        val type = if (stockHistory.isSoldOperation) {
+            activity.getString(R.string.sold)
+        } else {
+            activity.getString(R.string.bought)
+        }
 
-        holder.txtType.text =
-            if (stockHistory.isSoldOperation) {
-                activity.getString(R.string.sold)
-            } else {
-                activity.getString(R.string.bought)
-            }
+        holder.txtTypeDate.text = activity.getString(
+            R.string.stock_history_type_date,
+            type,
+            DateUtil.formatDate(stockHistory.timeStamp, DateUtil.DEFAULT_PATTERN)
+        )
 
-        holder.txtQuantity.text = stockHistory.quantity.toString()
+        holder.txtQuantityAndPrice.text = activity.getString(R.string.stock_history_quant_price,stockHistory.quantity,stockHistory.price)
+
+        holder.txtTotalPrice.text = (stockHistory.quantity * stockHistory.price).toString()
 
 
     }
@@ -54,9 +59,9 @@ class StockHistoryAdapter(private val list:List<StockHistory>,private val activi
 
 
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val txtDate: TextView = view.findViewById(R.id.row_stock_history_txtDate)
-        val txtType: TextView = view.findViewById(R.id.row_stock_history_txtType)
-
-        val txtQuantity: TextView = view.findViewById(R.id.row_stock_history_txtQuantity)
+        val txtTypeDate: TextView = view.findViewById(R.id.row_stock_history_txtTypeAndDate)
+        val txtQuantityAndPrice: TextView =
+            view.findViewById(R.id.row_stock_history_txtQuantityAndPrice)
+        val txtTotalPrice: TextView = view.findViewById(R.id.row_stock_history_txtTotalPrice)
     }
 }
