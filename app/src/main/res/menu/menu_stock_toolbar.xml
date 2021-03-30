@@ -6,14 +6,14 @@
         android:id="@+id/menu_stock_toolbar_search"
         android:title="@string/search"
         android:icon="@drawable/ic_baseline_search_24"
-        app:iconTint="@color/textColor"
+        app:iconTint="@color/iconsColor"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_stock_toolbar_filter"
         android:title="@string/filter"
         android:icon="@drawable/ic_baseline_filter_list_24"
-        app:iconTint="@color/textColor"
+        app:iconTint="@color/iconsColor"
         app:showAsAction="ifRoom"/>
 
 

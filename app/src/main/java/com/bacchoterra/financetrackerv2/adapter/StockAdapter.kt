@@ -41,9 +41,8 @@ class StockAdapter(val activity: Activity) :
     private fun bindStock(holder: MyViewHolder, stock: Stock) {
 
         holder.txtName.text = stock.name
-        stock.broker.let { holder.txtBroker.text = stock.broker }
+        holder.txtOperationType.text = if (stock.isSoldOperation) activity.getString(R.string.opera_o_vendida) else activity.getString(R.string.oper_o_comprada)
         holder.txtTotalSpent.text = activity.getString(R.string.money_symbol_price,stock.totalSpent)
-        holder.txtQuantity.text = activity.getString(R.string.x_papeis,stock.quantity)
 
 
         when {
@@ -117,9 +116,8 @@ class StockAdapter(val activity: Activity) :
         val rootLayout: ViewGroup = view.findViewById(R.id.row_stock_rootLayout)
         val imageStatus: ImageView = view.findViewById(R.id.row_stock_image_view)
         val txtName: TextView = view.findViewById(R.id.row_stock_txtName)
-        val txtBroker: TextView = view.findViewById(R.id.row_stock_txtBroker)
+        val txtOperationType: TextView = view.findViewById(R.id.row_stock_txtOperationType)
         val txtTotalSpent: TextView = view.findViewById(R.id.row_stock_txt_totalSpent)
-        val txtQuantity: TextView = view.findViewById(R.id.row_stock_txtQuantity)
 
 
     }

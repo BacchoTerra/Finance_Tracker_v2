@@ -3,11 +3,9 @@
     <style name="Theme.FinanceTrackerV2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColorDark</item>
-        <item name="colorPrimaryVariant">@color/secondaryColorVariant</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorSecondaryVariant">@color/secondaryColorVariant</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/primaryColorDark</item>
         <!-- Customize your theme here. -->
@@ -17,7 +15,7 @@
     <style name="ChatTextView" parent="android:Widget.TextView">
 
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:fontFamily">@font/roboto</item>
 
     </style>
@@ -39,14 +37,14 @@
         <item name="hintEnabled">false</item>
         <item name="android:textColorHint">@color/hintTextColor</item>
         <item name="boxBackgroundColor">@color/mainBackgroundColor</item>
-        <item name="endIconTint">@color/textColor</item>
+        <item name="endIconTint">@color/primaryTextColor</item>
 
     </style>
 
     <style name="RegularOutlinedInputLayout.EditText" parent="Widget.AppCompat.EditText">
 
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textColorHint">@color/hintTextColor</item>
         <item name="android:textCursorDrawable">@drawable/shape_cursor_white</item>
 

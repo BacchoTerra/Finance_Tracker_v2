@@ -5,6 +5,6 @@
         android:width="1dp"/>
 
     <solid
-        android:color="@color/textColor"/>
+        android:color="@color/primaryTextColor"/>
 
 </shape>

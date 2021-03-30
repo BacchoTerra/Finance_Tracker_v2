@@ -5,13 +5,13 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackgroundColor">
+    android:background="@color/primaryColor">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="230dp"
-        android:background="@color/mainBackgroundColor"
+        android:background="@color/primaryColor"
         app:elevation="0dp">
 
 
@@ -28,7 +28,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:title="Todas as ações"
-                app:titleTextColor="@color/textColor" />
+                android:textColor="@color/primaryTextColorOnPrimaryColor" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -40,70 +40,5 @@
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!--
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            app:title="@string/stock_type"
-            app:titleTextColor="@color/textColor"
-            android:id="@+id/activity_stocks_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/mainBackgroundColor" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/activity_stocks_inputLayoutSearch"
-        style="@style/RegularOutlinedInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/activity_stocks_imageFilter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
-        app:startIconDrawable="@drawable/ic_baseline_search_24"
-        app:startIconTint="@color/textColor">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            style="@style/RegularOutlinedInputLayout.EditText"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/activity_stocks_imageFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_stocks_inputLayoutSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/activity_stocks_inputLayoutSearch"
-        app:srcCompat="@drawable/ic_baseline_filter_list_24"
-        app:tint="@color/textColor" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_stocks_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_stocks_inputLayoutSearch"
-        tools:listitem="@layout/row_stock" />
-
--->
 
 

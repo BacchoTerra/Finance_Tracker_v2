@@ -5,7 +5,7 @@
         android:radius="11dp"/>
 
     <gradient
-        android:startColor="@color/secondaryColorVariant"
+        android:startColor="@color/secondaryColor"
         android:endColor="@color/purple_500"
         android:angle="0"/>
 

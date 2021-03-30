@@ -7,21 +7,21 @@
         android:checked="true"
         android:enabled="true"
         android:id="@+id/btm_nav_main_menu_dashboard"
-        app:iconTint="@color/secondaryColorVariant"
+        app:iconTint="@color/iconsColor"
         android:icon="@drawable/ic_baseline_dashboard_24"
         />
     <item
         android:title="@string/information"
         android:enabled="true"
         android:id="@+id/btm_nav_main_menu_info"
-        app:iconTint="@color/secondaryColorVariant"
+        app:iconTint="@color/iconsColor"
         android:icon="@drawable/ic_baseline_info_24"
         />
     <item
         android:title="@string/profile"
         android:enabled="true"
         android:id="@+id/btm_nav_main_menu_profile"
-        app:iconTint="@color/secondaryColorVariant"
+        app:iconTint="@color/iconsColor"
         android:icon="@drawable/ic_baseline_person_24"
         />
 

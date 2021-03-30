@@ -94,4 +94,9 @@
     <string name="stock_history_quant_price">%1$d papéis de %2$f</string>
     <string name="filter">Filtrar</string>
     <string name="search">Procurar</string>
+    <string name="label_greet_user">%1$s , %2$s</string>
+    <string name="good_morning">Bom dia</string>
+    <string name="good_afternoon">Boa tarde</string>
+    <string name="good_evening">Boa noite</string>
+    <string name ="label_day_month_year">%1$d %2$s %3$d</string>
 </resources>
