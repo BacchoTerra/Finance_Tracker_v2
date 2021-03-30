@@ -41,7 +41,7 @@
     <string name="stock_type">Renda variável</string>
     <string name="fund_type">Fundos</string>
     <string name="hello_message">Olá, %1$s</string>
-    <string name="add">Adicionar</string>
+    <string name="add">+ Adicionar</string>
     <string name="oper_o_comprada">Operação comprada</string>
     <string name="opera_o_vendida">Operação vendida</string>
     <string name="quantity">Quantidade</string>
@@ -92,4 +92,6 @@
     <string name="add_sell">Adicionar venda</string>
     <string name="stock_history_type_date">%1$s (%2$s)</string>
     <string name="stock_history_quant_price">%1$d papéis de %2$f</string>
+    <string name="filter">Filtrar</string>
+    <string name="search">Procurar</string>
 </resources>

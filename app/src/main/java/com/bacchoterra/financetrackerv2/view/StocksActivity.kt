@@ -3,7 +3,6 @@ package com.bacchoterra.financetrackerv2.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -45,7 +44,7 @@ class StocksActivity : AppCompatActivity() {
         binder = ActivityStocksBinding.inflate(layoutInflater)
         setContentView(binder.root)
         initToolbar()
-        initRecyclerView()
+        initRecyclerViewLayout()
         createActivityContract()
         fetchAllStocks()
 
@@ -88,36 +87,35 @@ class StocksActivity : AppCompatActivity() {
     private fun initToolbar(){
 
         setSupportActionBar(binder.activityStocksToolbar)
-        binder.activityStocksRecyclerView.requestFocus()
 
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerViewLayout(){
 
 
-        recyclerView = binder.activityStocksRecyclerView
+        val recyclerViewLayoutBinder = binder.includedLayout
+
+       recyclerView = recyclerViewLayoutBinder.stocksRecyclerView
         recyclerViewAdapter = StockAdapter(this)
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
+        recyclerViewLayoutBinder.stocksTxtAdd.setOnClickListener{
+
+            activityLauncher.launch(Intent(this,AddStockActivity::class.java))
+
+        }
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-       menuInflater.inflate(R.menu.menu_toolbar_add,menu)
+       menuInflater.inflate(R.menu.menu_stock_toolbar,menu)
 
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if (item.itemId == R.id.menu_toolbar_add_add){
-           activityLauncher.launch(Intent(this,AddStockActivity::class.java))
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
 }

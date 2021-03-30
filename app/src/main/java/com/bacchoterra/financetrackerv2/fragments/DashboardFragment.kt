@@ -30,26 +30,8 @@ class DashboardFragment : Fragment() {
     ): View {
         binder = FragmentDashboardBinding.inflate(inflater)
 
-        inflateStockLastItem(inflater)
-
         return binder.root
     }
-
-    private fun inflateStockLastItem(inflater: LayoutInflater){
-
-        val containerLayout = binder.fragmentDashboardStockContainer
-        val rowContainer:ViewGroup = containerLayout.viewDashboardLastItemRowContainer
-        inflater.inflate(R.layout.row_stock,rowContainer,true)
-
-        containerLayout.viewDashboardLastTxtSeeMore.setOnClickListener{
-
-            requireActivity().startActivity(Intent(activity,StocksActivity::class.java))
-
-        }
-
-
-    }
-
 
 
 }
