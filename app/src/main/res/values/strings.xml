@@ -78,7 +78,7 @@
     <string name="error_invalid_stock_price">Insira um valor maior que R$ 0.00</string>
     <string name="error_invalid_stock_quantity">Insira um número maior que 0</string>
     <string name="x_papeis">%1$d papéis</string>
-    <string name="money_symbol_price">R$ %1$f</string>
+    <string name="money_symbol_price">%1$s</string>
     <string name="first_buy">Primeira compra</string>
     <string name="history">História</string>
     <string name="broker_and_type">%1$s ,%2$s</string>
@@ -91,7 +91,7 @@
     <string name="add_buy">Adicionar compra</string>
     <string name="add_sell">Adicionar venda</string>
     <string name="stock_history_type_date">%1$s (%2$s)</string>
-    <string name="stock_history_quant_price">%1$d papéis de %2$f</string>
+    <string name="stock_history_quant_price">%1$d papéis de R$ %2$.2f</string>
     <string name="filter">Filtrar</string>
     <string name="search">Procurar</string>
     <string name="label_greet_user">%1$s , %2$s</string>

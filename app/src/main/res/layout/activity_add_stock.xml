@@ -224,7 +224,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="@color/secondaryColor"
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtStockQuantity"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutQuantity"
             tools:text="@string/add_broker" />
@@ -255,7 +255,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="@color/secondaryColor"
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddBroker"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutAddBroker"
             tools:text="@string/add_expected_time" />
@@ -286,7 +286,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="@color/secondaryColor"
             app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtAddExpectedTime"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_inputLayoutAddExpectedTime"
             tools:text="@string/add_technique" />

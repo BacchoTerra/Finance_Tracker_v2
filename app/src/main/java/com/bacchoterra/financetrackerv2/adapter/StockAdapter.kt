@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.model.Stock
+import com.bacchoterra.financetrackerv2.utils.NumbersUtil
 import com.bacchoterra.financetrackerv2.view.ShowStockActivity
 import com.bacchoterra.financetrackerv2.view.StocksActivity
 
@@ -42,7 +43,7 @@ class StockAdapter(val activity: Activity) :
 
         holder.txtName.text = stock.name
         holder.txtOperationType.text = if (stock.isSoldOperation) activity.getString(R.string.opera_o_vendida) else activity.getString(R.string.oper_o_comprada)
-        holder.txtTotalSpent.text = activity.getString(R.string.money_symbol_price,stock.totalSpent)
+        holder.txtTotalSpent.text = activity.getString(R.string.money_symbol_price,NumbersUtil.roundAndFormatToCurrency(stock.totalSpent))
 
 
         when {

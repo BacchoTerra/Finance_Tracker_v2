@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.model.StockHistory
 import com.bacchoterra.financetrackerv2.utils.DateUtil
+import com.bacchoterra.financetrackerv2.utils.NumbersUtil
 
 class StockHistoryAdapter(private val list: List<StockHistory>, private val activity: Activity) :
     RecyclerView.Adapter<StockHistoryAdapter.MyViewHolder>() {
@@ -48,7 +49,7 @@ class StockHistoryAdapter(private val list: List<StockHistory>, private val acti
 
         holder.txtQuantityAndPrice.text = activity.getString(R.string.stock_history_quant_price,stockHistory.quantity,stockHistory.price)
 
-        holder.txtTotalPrice.text = (stockHistory.quantity * stockHistory.price).toString()
+        holder.txtTotalPrice.text = activity.getString(R.string.money_symbol_price,NumbersUtil.roundAndFormatToCurrency((stockHistory.quantity * stockHistory.price)))
 
 
     }
