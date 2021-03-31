@@ -24,7 +24,7 @@ class AddStockActivity : AppCompatActivity() {
     private lateinit var editQuantity: TextInputEditText
     private lateinit var checkBoxIsSold: CheckBox
     private lateinit var editDate: MaskEditText
-    private lateinit var editPrice: TextInputEditText
+    private lateinit var editPrice: CurrencyEditText
 
     private lateinit var editBroker: TextInputEditText
     private lateinit var editPExpectedTime: TextInputEditText
@@ -84,7 +84,7 @@ class AddStockActivity : AppCompatActivity() {
         name = editName.text.toString().trim()
         date = editDate.text.toString().trim()
         price =
-            if (editPrice.text.toString().isNotBlank()) editPrice.text.toString().toFloat() else 0f
+            if (editPrice.text.toString().isNotBlank()) editPrice.rawValue.toFloat()/100 else 0f
         quantity = if (editQuantity.text.toString().isNotBlank()) editQuantity.text.toString()
             .toInt() else 0
 

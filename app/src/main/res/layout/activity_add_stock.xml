@@ -148,7 +148,7 @@
             android:id="@+id/activity_add_stock_inputLayoutPrice"
             style="@style/RegularOutlinedInputLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_marginStart="45dp"
             android:layout_marginTop="8dp"
             app:boxStrokeWidthFocused="1dp"
@@ -157,13 +157,13 @@
             app:layout_constraintStart_toStartOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtStockPrice">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.blackcat.currencyedittext.CurrencyEditText
                 android:id="@+id/activity_add_stock_editPrice"
                 style="@style/RegularOutlinedInputLayout.EditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_money_input"
-                android:inputType="numberDecimal"
+                android:layout_height="match_parent"
+                android:paddingStart="16dp"
+                android:maxLength="20"
                 tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
