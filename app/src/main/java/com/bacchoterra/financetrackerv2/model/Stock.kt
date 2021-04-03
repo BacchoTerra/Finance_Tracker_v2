@@ -11,8 +11,7 @@ data class Stock(
     val quantity: Int,
     val averagePrice: Float,
     val totalSpent: Float,
-    val history:List<StockHistory>,
-    val isSoldOperation:Boolean,
+    val history: List<StockHistory>,
     val expectedTimeInvested: String? = null,
     val isFinished: Boolean = false,
     val finalTimestamp: String? = null,
@@ -20,8 +19,8 @@ data class Stock(
     val broker: String? = null,
     val finalPrice: Float? = null,
     val profit: Float? = null,
-    @PrimaryKey(autoGenerate = true) val id: Int =0
-) :Serializable{
+    @PrimaryKey(autoGenerate = true) val id: Int = 0
+) : Serializable {
 
 
 }

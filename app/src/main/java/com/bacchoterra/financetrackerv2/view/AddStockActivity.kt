@@ -114,7 +114,7 @@ class AddStockActivity : AppCompatActivity() {
 
     private fun buildAndSendStockAsResult() {
 
-        val historyList = listOf(StockHistory(getStockDate()!!, checkBoxIsSold.isChecked, quantity,price))
+        val historyList = listOf(StockHistory(getStockDate()!!, quantity,price))
 
         val broker = if (editBroker.text.toString().trim()
                 .isNotBlank()
@@ -135,7 +135,6 @@ class AddStockActivity : AppCompatActivity() {
             price,
             quantity * price,
             historyList,
-            isSoldOperation = checkBoxIsSold.isChecked,
             expectedTimeInvested = expectedTime,
             techniqueUsed = techniqueUsed,
             broker = broker

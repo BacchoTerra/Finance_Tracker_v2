@@ -9,7 +9,7 @@ import com.bacchoterra.financetrackerv2.converter.Converters
 import com.bacchoterra.financetrackerv2.dao.StockDao
 import com.bacchoterra.financetrackerv2.model.Stock
 
-@Database(entities = [Stock::class], version = 2, exportSchema = false)
+@Database(entities = [Stock::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class FinanceDatabase : RoomDatabase() {
 

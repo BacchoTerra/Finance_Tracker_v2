@@ -1,37 +1,30 @@
 package com.bacchoterra.financetrackerv2.view
 
-import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.graphics.Color
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.adapter.StockHistoryAdapter
 import com.bacchoterra.financetrackerv2.application.FinanceApplication
 import com.bacchoterra.financetrackerv2.databinding.ActivityShowStockBinding
-import com.bacchoterra.financetrackerv2.databinding.FragmentDashboardBinding
 import com.bacchoterra.financetrackerv2.databinding.ViewStockButtonsBinding
 import com.bacchoterra.financetrackerv2.fragments.StockOperationBtmSheet
 import com.bacchoterra.financetrackerv2.model.Stock
-import com.bacchoterra.financetrackerv2.model.StockHistory
 import com.bacchoterra.financetrackerv2.utils.DateUtil
 import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
-import com.google.android.material.snackbar.Snackbar
 
 
-class ShowStockActivity : AppCompatActivity() {
+class ShowStockActivity : AppCompatActivity(), StockOperationBtmSheet.OnStockUpdated {
 
     //Layout components
     private lateinit var binder: ActivityShowStockBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: StockHistoryAdapter
 
     //Stock components
     private lateinit var stock: Stock
@@ -40,7 +33,7 @@ class ShowStockActivity : AppCompatActivity() {
     private var firstClick = true
 
     //ViewModel
-    private val viewModel:StockViewModel by viewModels {
+    private val viewModel: StockViewModel by viewModels {
         StockViewModel.StockViewModelFactory((application as FinanceApplication).stockRepository)
     }
 
@@ -58,13 +51,13 @@ class ShowStockActivity : AppCompatActivity() {
 
         stock = intent.extras?.get(StocksActivity.KEY_RECYCLER_STOCK) as Stock
 
-        bindStock()
+        bindStock(stock)
     }
 
-    private fun bindStock() {
+    private fun bindStock(stock: Stock) {
 
         binder.activityShowStockTxtName.text = stock.name
-        bindBrokerAndType()
+        bindBroker(stock)
 
         binder.activityShowStockTxtNameQuantity.text = getString(R.string.quant_x, stock.quantity)
         binder.activityShowStockTxtFirstDate.text =
@@ -75,32 +68,28 @@ class ShowStockActivity : AppCompatActivity() {
             stock.expectedTimeInvested ?: getString(R.string.not_defined)
 
 
-        initStockHistory()
+        initStockHistory(stock)
 
     }
 
-    private fun bindBrokerAndType() {
-
-        val operationType =
-            if (stock.isSoldOperation) getString(R.string.opera_o_vendida) else getString(R.string.oper_o_comprada)
+    private fun bindBroker(stock: Stock) {
 
         if (stock.broker == null) {
 
-            binder.activityShowStockTxtBrokerAndType.text =
-                getString(R.string.type_only, operationType)
+            binder.activityShowStockTxtBrokerAndType.text = null
+
 
         } else {
-            binder.activityShowStockTxtBrokerAndType.text =
-                getString(R.string.broker_and_type, stock.broker, operationType)
+            binder.activityShowStockTxtBrokerAndType.text = stock.broker
         }
 
 
     }
 
-    private fun initStockHistory() {
+    private fun initStockHistory(stock: Stock) {
 
         recyclerView = binder.activityShowStockRecyclerHistory
-        val adapter = StockHistoryAdapter(stock.history, this)
+        adapter = StockHistoryAdapter(stock.history, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
@@ -120,24 +109,25 @@ class ShowStockActivity : AppCompatActivity() {
 
         bind.fabAdd.setOnClickListener {
 
-            openBottomSheet(StockOperationBtmSheet.ADD_OPERATION)
+            openBottomSheet(StockOperationBtmSheet.ADD_OPERATION, stock)
 
         }
 
         bind.fabRemove.setOnClickListener {
 
-            openBottomSheet(StockOperationBtmSheet.REMOVE_OPERATION)
+            openBottomSheet(StockOperationBtmSheet.SELL_OPERATION, stock)
         }
 
 
     }
 
-    private fun openBottomSheet(operation: Int) {
+    private fun openBottomSheet(operation: Int, stock: Stock) {
 
         val operationBottomSheet = StockOperationBtmSheet()
 
         val bundle = Bundle()
-        bundle.putInt(StockOperationBtmSheet.KEY_ARGUMENTS, operation)
+        bundle.putInt(StockOperationBtmSheet.KEY_TYPE_ARGUMENTS, operation)
+        bundle.putSerializable(StockOperationBtmSheet.KEY_STOCK_ARGUMENTS, stock)
         operationBottomSheet.arguments = bundle
 
         operationBottomSheet.show(supportFragmentManager, null)
@@ -150,20 +140,33 @@ class ShowStockActivity : AppCompatActivity() {
         when {
 
             firstClick -> {
-                btnBinder.fabDelete.backgroundTintList = AppCompatResources.getColorStateList(this,R.color.error_color)
-                Toast.makeText(this,"Clique novamente para excluir",Toast.LENGTH_LONG).show()
+                btnBinder.fabDelete.backgroundTintList =
+                    AppCompatResources.getColorStateList(this, R.color.error_color)
+                Toast.makeText(this, "Clique novamente para excluir", Toast.LENGTH_LONG).show()
                 firstClick = false
             }
 
             else -> {
                 viewModel.delete(stock)
-                Toast.makeText(this,"done",Toast.LENGTH_SHORT).show()
-                finish ()
+                Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
+                finish()
             }
 
         }
 
 
+    }
+
+    override fun onBuyNewStock(updatedStock: Stock) {
+
+        viewModel.update(updatedStock)
+        bindStock(updatedStock)
+        this.stock = updatedStock
+
+    }
+
+    override fun onSellNewStock() {
+        Log.i("Porsche", "onSellNewStock: ")
     }
 
 
