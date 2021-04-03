@@ -2,11 +2,10 @@ package com.bacchoterra.financetrackerv2.repository
 
 import com.bacchoterra.financetrackerv2.dao.StockDao
 import com.bacchoterra.financetrackerv2.model.Stock
+import kotlinx.coroutines.flow.Flow
 
 class StockRepository(private val stockDao: StockDao) {
 
-
-    val allStock = stockDao.selectAll()
 
     suspend fun insert(stock: Stock) {
 
@@ -26,10 +25,41 @@ class StockRepository(private val stockDao: StockDao) {
 
     }
 
-    suspend fun deleteAll(){
+    suspend fun deleteAll() {
 
         stockDao.deleteAll()
 
     }
+
+    fun selectAll(): Flow<List<Stock>> {
+
+        return stockDao.selectAll()
+
+    }
+
+    fun selectAllOrderByDesc(): Flow<List<Stock>> {
+
+        return stockDao.selectAllOrderByDesc()
+
+    }
+
+    fun selectAllOrderByAsc(): Flow<List<Stock>> {
+
+        return stockDao.selectAllOrderByAsc()
+
+    }
+
+    fun selectAllFinished(): Flow<List<Stock>> {
+
+        return stockDao.selectAllFinished()
+
+    }
+
+    fun selectAllUnfinished(): Flow<List<Stock>> {
+
+        return stockDao.selectAllUnfinished()
+
+    }
+
 
 }

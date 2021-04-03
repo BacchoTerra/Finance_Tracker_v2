@@ -3,12 +3,14 @@ package com.bacchoterra.financetrackerv2.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
@@ -16,6 +18,7 @@ import com.bacchoterra.financetrackerv2.adapter.StockAdapter
 import com.bacchoterra.financetrackerv2.application.FinanceApplication
 import com.bacchoterra.financetrackerv2.databinding.ActivityStocksBinding
 import com.bacchoterra.financetrackerv2.model.Stock
+import com.bacchoterra.financetrackerv2.repository.StockRepository
 import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
 
 class StocksActivity : AppCompatActivity() {
@@ -27,6 +30,7 @@ class StocksActivity : AppCompatActivity() {
 
     //Stock components
     private lateinit var stock: Stock
+    private lateinit var allStock: LiveData<List<Stock>>
 
     companion object {
         const val KEY_RECYCLER_STOCK = "RECYCLER_STOCK"
@@ -47,7 +51,7 @@ class StocksActivity : AppCompatActivity() {
         initToolbar()
         initRecyclerViewLayout()
         createActivityContract()
-        fetchAllStocks()
+        fetchStocks(0)
 
 
     }
@@ -74,13 +78,16 @@ class StocksActivity : AppCompatActivity() {
 
     }
 
-    private fun fetchAllStocks() {
+    private fun fetchStocks(filter: Int) {
 
-        viewModel.allStock.observe(this, {
+        allStock = viewModel.selectAllStockWithFilter(filter)
+
+        allStock.observe(this) {
 
             recyclerViewAdapter.submitList(it)
 
-        })
+        }
+
 
     }
 
@@ -122,34 +129,15 @@ class StocksActivity : AppCompatActivity() {
 
         when (item.itemId) {
 
-            R.id.menu_stock_toolbar_filter_all -> Toast.makeText(this, "all", Toast.LENGTH_SHORT)
-                .show()
-
-            R.id.menu_stock_toolbar_filter_maior_menor -> Toast.makeText(
-                this,
-                "maior_menor",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.menu_stock_toolbar_filter_menor_maior -> Toast.makeText(
-                this,
-                "menor_manior",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.menu_stock_toolbar_filter_finalized -> Toast.makeText(
-                this,
-                "finalized",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.menu_stock_toolbar_filter_opened -> Toast.makeText(
-                this,
-                "opened",
-                Toast.LENGTH_SHORT
-            ).show()
-
+            R.id.menu_stock_toolbar_filter_all -> fetchStocks(0)
+            R.id.menu_stock_toolbar_filter_maior_menor -> fetchStocks(StockViewModel.ORDER_BY_DESC)
+            R.id.menu_stock_toolbar_filter_menor_maior -> fetchStocks(StockViewModel.ORDER_BY_ASC)
+            R.id.menu_stock_toolbar_filter_finalized -> fetchStocks(StockViewModel.FINISHED)
+            R.id.menu_stock_toolbar_filter_opened -> fetchStocks(StockViewModel.UNFINISHED)
 
         }
 
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
 }
