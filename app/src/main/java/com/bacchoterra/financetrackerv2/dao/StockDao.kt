@@ -22,4 +22,17 @@ interface StockDao {
     @Query("SELECT * FROM stock_table")
     fun selectAll():Flow<List<Stock>>
 
+    //Booleans dont exists..its turned to integer values, 0 being true and 1 being false
+    @Query("SELECT * FROM stock_table WHERE isFinished = 0")
+    fun selectAllUnfinished(): Flow<List<Stock>>
+
+    @Query("SELECT * FROM stock_table WHERE isFinished = 1")
+    fun selectAllFinished():Flow<List<Stock>>
+
+    @Query("SELECT * FROM stock_table ORDER BY totalSpent DESC")
+    fun selectAllOrderByDesc():Flow<List<Stock>>
+
+    @Query("SELECT * FROM stock_table ORDER BY totalSpent ASC")
+    fun selectAllOrderByAsc():Flow<List<Stock>>
+
 }
