@@ -37,6 +37,7 @@ class DashboardFragment : Fragment() {
         binder = FragmentDashboardBinding.inflate(inflater)
         greetUser()
         handleIncludedLayoutViews()
+        showAndHideTotalInvested()
 
         return binder.root
     }
@@ -84,6 +85,21 @@ class DashboardFragment : Fragment() {
 
             requireActivity().startActivity(Intent(requireActivity(),StocksActivity::class.java))
 
+        }
+
+    }
+
+    private fun showAndHideTotalInvested(){
+
+        val txtValue = binder.fragmentDashboardTxtTotalInvested
+
+        binder.fragmentDashboardImageEnableView.setOnClickListener{
+
+            if (txtValue.text.toString().contains("●")) {
+                txtValue.text = "R$ 89.666"
+            }else{
+                txtValue.text = getString(R.string.label_value_mask)
+            }
         }
 
     }

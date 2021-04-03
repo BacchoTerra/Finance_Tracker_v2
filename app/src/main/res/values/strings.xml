@@ -99,4 +99,10 @@
     <string name="good_afternoon">Boa tarde</string>
     <string name="good_evening">Boa noite</string>
     <string name ="label_day_month_year">%1$d %2$s %3$d</string>
+    <string name="todas_acoes">Todas</string>
+    <string name="pre_o_total_maior_menor">Preço total (maior-menor)</string>
+    <string name="pre_o_a_o_maior_menor">Preço total (menor-maior)</string>
+    <string name="somente_finalizadas">Somente finalizadas</string>
+    <string name="somente_abertas">Somente abertas</string>
+    <string name="label_value_mask">●●●●●</string>
 </resources>

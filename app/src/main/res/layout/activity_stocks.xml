@@ -27,8 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="Todas as ações"
-                android:textColor="@color/primaryTextColorOnPrimaryColor" />
+                app:title="Todas as ações" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

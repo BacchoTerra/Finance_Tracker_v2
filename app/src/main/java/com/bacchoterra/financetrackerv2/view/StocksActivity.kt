@@ -21,23 +21,24 @@ import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
 class StocksActivity : AppCompatActivity() {
 
     //Layout components
-    private lateinit var binder:ActivityStocksBinding
+    private lateinit var binder: ActivityStocksBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: StockAdapter
 
     //Stock components
-    private lateinit var stock:Stock
+    private lateinit var stock: Stock
+
     companion object {
         const val KEY_RECYCLER_STOCK = "RECYCLER_STOCK"
     }
 
     //ViewModel
-    private val viewModel:StockViewModel by viewModels {
+    private val viewModel: StockViewModel by viewModels {
         StockViewModel.StockViewModelFactory((application as FinanceApplication).stockRepository)
     }
 
     //Activity launcher
-    private lateinit var activityLauncher:ActivityResultLauncher<Intent>
+    private lateinit var activityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,27 +50,33 @@ class StocksActivity : AppCompatActivity() {
         fetchAllStocks()
 
 
+    }
+
+    private fun initToolbar() {
+
+        setSupportActionBar(binder.activityStocksToolbar)
 
     }
 
-    private fun createActivityContract(){
+    private fun createActivityContract() {
 
-        activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        activityLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 
-            if (result.resultCode == RESULT_OK) {
-                val data: Intent? = result.data
-                stock = data?.extras?.getSerializable(AddStockActivity.KEY_STOCK) as Stock
-                insertNewStock(stock)
+                if (result.resultCode == RESULT_OK) {
+                    val data: Intent? = result.data
+                    stock = data?.extras?.getSerializable(AddStockActivity.KEY_STOCK) as Stock
+                    insertNewStock(stock)
+                }
+
+
             }
 
-
-        }
-
     }
 
-    private fun fetchAllStocks (){
+    private fun fetchAllStocks() {
 
-        viewModel.allStock.observe(this,{
+        viewModel.allStock.observe(this, {
 
             recyclerViewAdapter.submitList(it)
 
@@ -77,45 +84,72 @@ class StocksActivity : AppCompatActivity() {
 
     }
 
-    private fun insertNewStock(stock: Stock){
+    private fun insertNewStock(stock: Stock) {
 
         viewModel.insert(stock)
-        Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show()
 
     }
 
-    private fun initToolbar(){
-
-        setSupportActionBar(binder.activityStocksToolbar)
-
-    }
-
-    private fun initRecyclerViewLayout(){
+    private fun initRecyclerViewLayout() {
 
 
         val recyclerViewLayoutBinder = binder.includedLayout
 
-       recyclerView = recyclerViewLayoutBinder.stocksRecyclerView
+        recyclerView = recyclerViewLayoutBinder.stocksRecyclerView
         recyclerViewAdapter = StockAdapter(this)
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        recyclerViewLayoutBinder.stocksTxtAdd.setOnClickListener{
+        recyclerViewLayoutBinder.stocksTxtAdd.setOnClickListener {
 
-            activityLauncher.launch(Intent(this,AddStockActivity::class.java))
+            activityLauncher.launch(Intent(this, AddStockActivity::class.java))
 
         }
-
 
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-       menuInflater.inflate(R.menu.menu_stock_toolbar,menu)
+        menuInflater.inflate(R.menu.menu_stock_toolbar, menu)
 
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.menu_stock_toolbar_filter_all -> Toast.makeText(this, "all", Toast.LENGTH_SHORT)
+                .show()
+
+            R.id.menu_stock_toolbar_filter_maior_menor -> Toast.makeText(
+                this,
+                "maior_menor",
+                Toast.LENGTH_SHORT
+            ).show()
+            R.id.menu_stock_toolbar_filter_menor_maior -> Toast.makeText(
+                this,
+                "menor_manior",
+                Toast.LENGTH_SHORT
+            ).show()
+            R.id.menu_stock_toolbar_filter_finalized -> Toast.makeText(
+                this,
+                "finalized",
+                Toast.LENGTH_SHORT
+            ).show()
+            R.id.menu_stock_toolbar_filter_opened -> Toast.makeText(
+                this,
+                "opened",
+                Toast.LENGTH_SHORT
+            ).show()
+
+
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
