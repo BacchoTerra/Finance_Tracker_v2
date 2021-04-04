@@ -105,4 +105,5 @@
     <string name="somente_finalizadas">Somente finalizadas</string>
     <string name="somente_abertas">Somente abertas</string>
     <string name="label_value_mask">●●●●●</string>
+    <string name="o_valor_da_venda_n_o_pode_ser_maior_que_o_valor_total">O valor da venda não pode ser maior que o valor total</string>
 </resources>

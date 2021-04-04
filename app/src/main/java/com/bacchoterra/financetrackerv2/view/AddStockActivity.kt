@@ -3,7 +3,6 @@ package com.bacchoterra.financetrackerv2.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import com.bacchoterra.financetrackerv2.R
@@ -28,7 +27,7 @@ class AddStockActivity : AppCompatActivity() {
 
     private lateinit var editBroker: TextInputEditText
     private lateinit var editPExpectedTime: TextInputEditText
-    private lateinit var editTechinique: TextInputEditText
+    private lateinit var editTechnique: TextInputEditText
 
 
     //Stock components
@@ -73,7 +72,7 @@ class AddStockActivity : AppCompatActivity() {
 
         editBroker = binder.activityAddStockEditBroker
         editPExpectedTime = binder.activityAddStockEditExpectedTime
-        editTechinique = binder.activityAddStockEditTechnique
+        editTechnique = binder.activityAddStockEditTechnique
 
         binder.activityAddStockTxtAddBasicInfo.requestFocus()
 
@@ -114,7 +113,8 @@ class AddStockActivity : AppCompatActivity() {
 
     private fun buildAndSendStockAsResult() {
 
-        val historyList = listOf(StockHistory(getStockDate()!!, checkBoxIsSold.isChecked, quantity,price))
+        //TODO: change all the currencyedittext raw value divider to 100.0 (double)
+        val historyList = listOf(StockHistory(getStockDate()!!, quantity,true,price))
 
         val broker = if (editBroker.text.toString().trim()
                 .isNotBlank()
@@ -124,9 +124,9 @@ class AddStockActivity : AppCompatActivity() {
                 .isNotBlank()
         ) editPExpectedTime.text.toString() else null
 
-        val techniqueUsed = if (editTechinique.text.toString().trim()
+        val techniqueUsed = if (editTechnique.text.toString().trim()
                 .isNotBlank()
-        ) editTechinique.text.toString() else null
+        ) editTechnique.text.toString() else null
 
         val stock = Stock(
             name.toUpperCase(Locale.ROOT),
@@ -135,7 +135,6 @@ class AddStockActivity : AppCompatActivity() {
             price,
             quantity * price,
             historyList,
-            isSoldOperation = checkBoxIsSold.isChecked,
             expectedTimeInvested = expectedTime,
             techniqueUsed = techniqueUsed,
             broker = broker

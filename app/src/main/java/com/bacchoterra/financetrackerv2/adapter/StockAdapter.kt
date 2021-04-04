@@ -34,7 +34,7 @@ class StockAdapter(val activity: Activity) :
 
         val stock = getItem(position)
 
-        bindStock(holder,stock)
+        bindStock(holder, stock)
 
 
     }
@@ -42,8 +42,11 @@ class StockAdapter(val activity: Activity) :
     private fun bindStock(holder: MyViewHolder, stock: Stock) {
 
         holder.txtName.text = stock.name
-        holder.txtOperationType.text = if (stock.isSoldOperation) activity.getString(R.string.opera_o_vendida) else activity.getString(R.string.oper_o_comprada)
-        holder.txtTotalSpent.text = activity.getString(R.string.money_symbol_price,NumbersUtil.roundAndFormatToCurrency(stock.totalSpent))
+        stock.broker?.let { holder.txtBroker.text = stock.broker }
+        holder.txtTotalSpent.text = activity.getString(
+            R.string.money_symbol_price,
+            NumbersUtil.roundAndFormatToCurrency(stock.totalSpent)
+        )
 
 
         when {
@@ -98,14 +101,13 @@ class StockAdapter(val activity: Activity) :
 
         }
 
-        holder.rootLayout.setOnClickListener{
+        holder.rootLayout.setOnClickListener {
 
-            val intent = Intent(activity,ShowStockActivity::class.java)
-            intent.putExtra(StocksActivity.KEY_RECYCLER_STOCK,stock)
+            val intent = Intent(activity, ShowStockActivity::class.java)
+            intent.putExtra(StocksActivity.KEY_RECYCLER_STOCK, stock)
             activity.startActivity(intent)
 
         }
-
 
 
     }
@@ -117,7 +119,7 @@ class StockAdapter(val activity: Activity) :
         val rootLayout: ViewGroup = view.findViewById(R.id.row_stock_rootLayout)
         val imageStatus: ImageView = view.findViewById(R.id.row_stock_image_view)
         val txtName: TextView = view.findViewById(R.id.row_stock_txtName)
-        val txtOperationType: TextView = view.findViewById(R.id.row_stock_txtOperationType)
+        val txtBroker: TextView = view.findViewById(R.id.row_stock_txtBroker)
         val txtTotalSpent: TextView = view.findViewById(R.id.row_stock_txt_totalSpent)
 
 
@@ -130,7 +132,7 @@ class StockAdapter(val activity: Activity) :
         }
 
         override fun areContentsTheSame(oldItem: Stock, newItem: Stock): Boolean {
-            return oldItem.name == newItem.name && oldItem.initialTimestamp == newItem.initialTimestamp && oldItem.quantity == newItem.quantity && oldItem.averagePrice == newItem.averagePrice && oldItem.totalSpent == newItem.totalSpent && oldItem.isSoldOperation == newItem.isSoldOperation && oldItem.history == newItem.history && oldItem.expectedTimeInvested == newItem.expectedTimeInvested && oldItem.isFinished == newItem.isFinished && oldItem.finalTimestamp == newItem.finalTimestamp && oldItem.techniqueUsed == newItem.techniqueUsed && oldItem.broker == newItem.broker && oldItem.finalPrice == newItem.finalPrice && oldItem.profit == newItem.profit && oldItem.id == newItem.id
+            return oldItem.name == newItem.name && oldItem.initialTimestamp == newItem.initialTimestamp && oldItem.quantity == newItem.quantity && oldItem.averagePrice == newItem.averagePrice && oldItem.totalSpent == newItem.totalSpent && oldItem.history == newItem.history && oldItem.expectedTimeInvested == newItem.expectedTimeInvested && oldItem.isFinished == newItem.isFinished && oldItem.finalTimestamp == newItem.finalTimestamp && oldItem.techniqueUsed == newItem.techniqueUsed && oldItem.broker == newItem.broker && oldItem.finalPrice == newItem.finalPrice && oldItem.profit == newItem.profit && oldItem.id == newItem.id
         }
     }
 

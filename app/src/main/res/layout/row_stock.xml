@@ -38,7 +38,7 @@
         tools:text="ITUB4" />
 
     <TextView
-        android:id="@+id/row_stock_txtOperationType"
+        android:id="@+id/row_stock_txtBroker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"

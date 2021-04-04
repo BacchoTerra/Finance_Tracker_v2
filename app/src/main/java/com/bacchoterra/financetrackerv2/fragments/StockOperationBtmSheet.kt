@@ -1,76 +1,165 @@
 package com.bacchoterra.financetrackerv2.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
 import com.bacchoterra.financetrackerv2.R
+import com.bacchoterra.financetrackerv2.databinding.BtmSheetAddStockHistoryBinding
+import com.bacchoterra.financetrackerv2.model.Stock
 import com.bacchoterra.financetrackerv2.model.StockHistory
+import com.bacchoterra.financetrackerv2.utils.StockHistoryManager
+import com.blackcat.currencyedittext.CurrencyEditText
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
+import java.lang.ClassCastException
 
 class StockOperationBtmSheet : BottomSheetDialogFragment() {
 
     companion object {
 
-        const val KEY_ARGUMENTS = "ARGUMENTS"
+        const val KEY_TYPE_ARGUMENTS = "TYPE_ARGUMENTS"
+        const val KEY_STOCK_ARGUMENTS = "STOCK_ARGUMENTS"
         const val ADD_OPERATION = 0
-        const val REMOVE_OPERATION = 1
+        const val SELL_OPERATION = 1
 
     }
+
+    //Layout components
+    private lateinit var binder: BtmSheetAddStockHistoryBinding
+    private lateinit var editPrice: CurrencyEditText
+    private lateinit var editQuantity: TextInputEditText
+    private lateinit var btnSave: Button
+
+    //Stock components
+    private lateinit var stock: Stock
+
+    //Listener
+    private lateinit var mListener: OnStockUpdated
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
+        retrieveStock()
+        initViews(inflater)
+        handleLayoutDisplayName()
+        checkFieldAndDoOperation()
 
 
-        return inflateChosenLayout(inflater, container)
+        return binder.root
     }
 
-    private fun inflateChosenLayout(inflater: LayoutInflater, container: ViewGroup?): View? {
+    override fun onAttach(context: Context) {
 
-        val view = inflater.inflate(R.layout.btm_sheet_add_stock_history,container,false)
+        try {
+            mListener = context as OnStockUpdated
+        } catch (e: ClassCastException) {
+            throw ClassCastException("Please, implement ${mListener::class}")
+        }
+
+        super.onAttach(context)
+    }
+
+    private fun initViews(inflater: LayoutInflater) {
+
+        binder = BtmSheetAddStockHistoryBinding.inflate(inflater)
+        editQuantity = binder.btomSheetAddStockHistoryEditQuantity
+        editPrice = binder.btomSheetAddStockHistoryEditPrice
+        btnSave = binder.btomSheetAddStockHistoryBtnSave
 
 
-        when (arguments?.get(KEY_ARGUMENTS)) {
+    }
 
-            ADD_OPERATION -> handleAddOperation(view)
+    private fun retrieveStock() {
+        stock = arguments?.get(KEY_STOCK_ARGUMENTS) as Stock
+    }
 
-            REMOVE_OPERATION -> handleRemoveOperation(view)
+    private fun handleLayoutDisplayName() {
+        when (arguments?.get(KEY_TYPE_ARGUMENTS)) {
 
+            ADD_OPERATION -> binder.btomSheetAddStockHistoryTxtHeader.text =
+                getString(R.string.add_buy)
+            SELL_OPERATION -> binder.btomSheetAddStockHistoryTxtHeader.text =
+                getString(R.string.add_sell)
+
+
+        }
+    }
+
+    private fun addBuyOperation() {
+        val stockHistoryManager = StockHistoryManager(stock)
+
+        stockHistoryManager.addNewOperationToList(createNewStockHistory(true),true)
+        mListener.onBuyNewStock(stockHistoryManager.requestUpdatedStock())
+        dismiss()
+
+    }
+
+    private fun addSellOperation() {
+        val stockHistoryManager = StockHistoryManager(stock)
+
+        stockHistoryManager.addNewOperationToList(createNewStockHistory(false),false)
+
+        if (stockHistoryManager.requestUpdatedStock().totalSpent < 0) {
+            binder.btomSheetAddStockHistoryTxtErrorValue.visibility = View.VISIBLE
+        }else{
+            mListener.onSellNewStock(stockHistoryManager.requestUpdatedStock())
+            dismiss()
+        }
+
+
+    }
+
+    private fun createNewStockHistory(isBuyOperation:Boolean): StockHistory {
+
+        val quantity = binder.btomSheetAddStockHistoryEditQuantity.text.toString().toInt()
+        val price = (binder.btomSheetAddStockHistoryEditPrice.rawValue / 100.0).toFloat()
+
+        return StockHistory(System.currentTimeMillis(), quantity,isBuyOperation, price)
+    }
+
+    private fun checkFieldAndDoOperation() {
+
+        btnSave.setOnClickListener {
+
+
+            val price = editPrice.rawValue / 100.0
+            val quantity = editQuantity.text.toString()
+
+            if (price > 0) {
+                if (quantity.isNotBlank() && quantity.toInt() > 0) {
+
+                    when (arguments?.getInt(KEY_TYPE_ARGUMENTS)) {
+
+                        ADD_OPERATION -> addBuyOperation()
+                        SELL_OPERATION -> addSellOperation()
+
+                    }
+
+                } else {
+                    editQuantity.error = "*"
+                }
+            } else {
+                editPrice.error = "*"
+                Log.i("porsche", "checkFieldAndDoOperation: $price")
             }
 
-        return view
-    }
-
-    private fun handleAddOperation(view:View){
-        view.findViewById<TextView>(R.id.btom_sheet_add_stock_history_txtHeader).text = getString(R.string.add_buy)
-
-        view.findViewById<Button>(R.id.btom_sheet_add_stock_history_btnSave).setOnClickListener {
-
         }
-
     }
 
-    private fun handleRemoveOperation(view:View){
-        view.findViewById<TextView>(R.id.btom_sheet_add_stock_history_txtHeader).text = getString(R.string.add_sell)
+    interface OnStockUpdated {
 
-        view.findViewById<Button>(R.id.btom_sheet_add_stock_history_btnSave).setOnClickListener {
+        fun onBuyNewStock(updatedStock: Stock)
 
-        }
-
-    }
-
-    private fun buildStockHistory(view:View){
-
-        val editPrice = view.findViewById<TextInputEditText>(R.id.btom_sheet_add_stock_history_editPrice)
-        val editQuantity = view.findViewById<TextInputEditText>(R.id.btom_sheet_add_stock_history_editQuantity)
+        fun onSellNewStock(updatedStock: Stock)
 
     }
 
