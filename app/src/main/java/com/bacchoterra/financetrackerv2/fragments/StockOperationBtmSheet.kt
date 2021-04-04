@@ -107,8 +107,14 @@ class StockOperationBtmSheet : BottomSheetDialogFragment() {
         val stockHistoryManager = StockHistoryManager(stock)
 
         stockHistoryManager.addNewOperationToList(createNewStockHistory(false),false)
-        mListener.onSellNewStock(stockHistoryManager.requestUpdatedStock())
-        dismiss()
+
+        if (stockHistoryManager.requestUpdatedStock().totalSpent < 0) {
+            binder.btomSheetAddStockHistoryTxtErrorValue.visibility = View.VISIBLE
+        }else{
+            mListener.onSellNewStock(stockHistoryManager.requestUpdatedStock())
+            dismiss()
+        }
+
 
     }
 

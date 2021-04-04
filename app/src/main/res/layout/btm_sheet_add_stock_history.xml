@@ -65,12 +65,23 @@
         android:id="@+id/btom_sheet_add_stock_history_btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/shape_btn_attractive"
         android:text="@string/save"
-        android:textColor="@color/primaryTextColor"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btom_sheet_add_stock_history_inputQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/btom_sheet_add_stock_history_txtErrorValue" />
+
+    <TextView
+        android:id="@+id/btom_sheet_add_stock_history_txtErrorValue"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/o_valor_da_venda_n_o_pode_ser_maior_que_o_valor_total"
+        android:textColor="@color/error_color"
         app:layout_constraintStart_toStartOf="@+id/btom_sheet_add_stock_history_inputQuantity"
         app:layout_constraintTop_toBottomOf="@+id/btom_sheet_add_stock_history_inputQuantity" />
 

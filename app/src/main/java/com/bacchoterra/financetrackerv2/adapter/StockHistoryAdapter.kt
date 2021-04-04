@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +47,13 @@ class StockHistoryAdapter(private val list: List<StockHistory>, private val acti
         holder.txtQuantityAndPrice.text = activity.getString(R.string.stock_history_quant_price,stockHistory.quantity,stockHistory.price)
 
         holder.txtTotalPrice.text = activity.getString(R.string.money_symbol_price,NumbersUtil.roundAndFormatToCurrency((stockHistory.quantity * stockHistory.price)))
+
+        when (stockHistory.isBuyOperation) {
+
+            true -> holder.txtTotalPrice.setTextColor(ContextCompat.getColor(activity,R.color.chatGreenColor))
+            false -> holder.txtTotalPrice.setTextColor(ContextCompat.getColor(activity,R.color.error_color))
+
+        }
 
 
     }
