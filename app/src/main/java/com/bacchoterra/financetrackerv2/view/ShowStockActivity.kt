@@ -165,8 +165,10 @@ class ShowStockActivity : AppCompatActivity(), StockOperationBtmSheet.OnStockUpd
 
     }
 
-    override fun onSellNewStock() {
-        Log.i("Porsche", "onSellNewStock: ")
+    override fun onSellNewStock(updatedStock: Stock) {
+        viewModel.update(updatedStock)
+        bindStock(updatedStock)
+        this.stock = updatedStock
     }
 
 

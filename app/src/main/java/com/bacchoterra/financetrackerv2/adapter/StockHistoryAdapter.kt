@@ -35,7 +35,7 @@ class StockHistoryAdapter(private val list: List<StockHistory>, private val acti
 
     private fun bindStockHistory(holder: MyViewHolder, stockHistory: StockHistory) {
 
-        val type = activity.getString(R.string.bought)
+        val type = if (stockHistory.isBuyOperation) activity.getString(R.string.bought) else activity.getString(R.string.sold)
 
         holder.txtTypeDate.text = activity.getString(
             R.string.stock_history_type_date,

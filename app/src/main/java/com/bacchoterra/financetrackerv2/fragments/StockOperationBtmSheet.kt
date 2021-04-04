@@ -97,18 +97,27 @@ class StockOperationBtmSheet : BottomSheetDialogFragment() {
     private fun addBuyOperation() {
         val stockHistoryManager = StockHistoryManager(stock)
 
-        stockHistoryManager.addNewOperationToList(createNewStockHistory())
+        stockHistoryManager.addNewOperationToList(createNewStockHistory(true),true)
         mListener.onBuyNewStock(stockHistoryManager.requestUpdatedStock())
         dismiss()
 
     }
 
-    private fun createNewStockHistory(): StockHistory {
+    private fun addSellOperation() {
+        val stockHistoryManager = StockHistoryManager(stock)
+
+        stockHistoryManager.addNewOperationToList(createNewStockHistory(false),false)
+        mListener.onSellNewStock(stockHistoryManager.requestUpdatedStock())
+        dismiss()
+
+    }
+
+    private fun createNewStockHistory(isBuyOperation:Boolean): StockHistory {
 
         val quantity = binder.btomSheetAddStockHistoryEditQuantity.text.toString().toInt()
         val price = (binder.btomSheetAddStockHistoryEditPrice.rawValue / 100.0).toFloat()
 
-        return StockHistory(System.currentTimeMillis(), quantity, price)
+        return StockHistory(System.currentTimeMillis(), quantity,isBuyOperation, price)
     }
 
     private fun checkFieldAndDoOperation() {
@@ -125,7 +134,7 @@ class StockOperationBtmSheet : BottomSheetDialogFragment() {
                     when (arguments?.getInt(KEY_TYPE_ARGUMENTS)) {
 
                         ADD_OPERATION -> addBuyOperation()
-                        SELL_OPERATION -> Log.i("Porsche", "onCreateView: Not yet")
+                        SELL_OPERATION -> addSellOperation()
 
                     }
 
@@ -144,7 +153,7 @@ class StockOperationBtmSheet : BottomSheetDialogFragment() {
 
         fun onBuyNewStock(updatedStock: Stock)
 
-        fun onSellNewStock()
+        fun onSellNewStock(updatedStock: Stock)
 
     }
 
