@@ -6,10 +6,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.adapter.StockHistoryAdapter
+import com.bacchoterra.financetrackerv2.api.ApiStockModel
+import com.bacchoterra.financetrackerv2.api.StockApiUtil
 import com.bacchoterra.financetrackerv2.application.FinanceApplication
 import com.bacchoterra.financetrackerv2.databinding.ActivityShowStockBinding
 import com.bacchoterra.financetrackerv2.databinding.ViewStockButtonsBinding
@@ -17,6 +21,10 @@ import com.bacchoterra.financetrackerv2.fragments.StockOperationBtmSheet
 import com.bacchoterra.financetrackerv2.model.Stock
 import com.bacchoterra.financetrackerv2.utils.DateUtil
 import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ShowStockActivity : AppCompatActivity(), StockOperationBtmSheet.OnStockUpdated {
@@ -44,6 +52,8 @@ class ShowStockActivity : AppCompatActivity(), StockOperationBtmSheet.OnStockUpd
         setContentView(binder.root)
         retrieveStock()
         handleButtons()
+
+        callApiForResults()
     }
 
 
@@ -152,6 +162,46 @@ class ShowStockActivity : AppCompatActivity(), StockOperationBtmSheet.OnStockUpd
                 finish()
             }
 
+        }
+
+
+    }
+
+    private fun callApiForResults() {
+
+        val api = StockApiUtil.getApi()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+
+            val response = api.getStockInfo(stock.name)
+
+            if (response.isSuccessful) {
+
+                withContext(Dispatchers.Main) {
+
+                    displayStockInformationFromApi(response.body()!!)
+
+                }
+
+            } else {
+                Snackbar.make(binder.root, "Erro ao recuperar valores", Snackbar.LENGTH_LONG).show()
+            }
+
+        }
+
+    }
+
+    private fun displayStockInformationFromApi(information: ApiStockModel) {
+
+        binder.activityShowStockTxtDayVariation.text = getString(R.string.label_day_variation_only,information.data.porcentagem_variacao_dia)
+        binder.activityShowStockTxtVarDay.text = getString(R.string.label_day_variation_with_text,information.data.porcentagem_variacao_dia)
+        binder.activityShowStockTxtMaxDay.text = getString(R.string.label_max_day,information.data.maximo_dia)
+        binder.activityShowStockTxtMinDay.text = getString(R.string.label_min_day,information.data.minimo_dia)
+        binder.activityShowStockTxtCurrentValue.text = getString(R.string.label_current_value,information.data.valor)
+
+        if (information.data.porcentagem_variacao_dia <=0) {
+            binder.activityShowStockTxtDayVariation.setTextColor(ContextCompat.getColor(this,R.color.error_color))
+            binder.activityShowStockTxtVarDay.setTextColor(ContextCompat.getColor(this,R.color.error_color))
         }
 
 
