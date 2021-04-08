@@ -39,6 +39,13 @@ class DashboardFragment : Fragment() {
         handleIncludedLayoutViews()
         showAndHideTotalInvested()
 
+
+        binder.fragmentDashboardTxtGreetings.setOnClickListener{
+
+            requireActivity().startActivity(Intent(requireContext(),StocksActivity::class.java),)
+
+        }
+
         return binder.root
     }
 
@@ -50,14 +57,14 @@ class DashboardFragment : Fragment() {
         when (calendar.get(Calendar.HOUR_OF_DAY)) {
 
             in (4..11) -> {
-                setGreetTextAndDrawable(getString(R.string.good_morning),R.drawable.ic_baseline_light_mode_24,Color.YELLOW)
+                setGreetTextAndDrawable(getString(R.string.good_morning))
 
             }
             in (12..18) -> {
-                setGreetTextAndDrawable(getString(R.string.good_afternoon),R.drawable.ic_baseline_light_mode_24,Color.YELLOW)
+                setGreetTextAndDrawable(getString(R.string.good_afternoon))
             }
             else -> {
-                setGreetTextAndDrawable(getString(R.string.good_evening),R.drawable.ic_baseline_nights_stay_24,Color.LTGRAY)
+                setGreetTextAndDrawable(getString(R.string.good_evening))
             }
 
         }
@@ -69,31 +76,24 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun setGreetTextAndDrawable(greet:String,drawable:Int,color:Int){
+    private fun setGreetTextAndDrawable(greet:String){
 
-        binder.fragmentDashboardTxtHello.text = getString(R.string.label_greet_user,greet,sharedPrefsUtil.getUserName())
-        binder.fragmentDashboardTxtHello.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable,0,0,0)
-        TextViewCompat.setCompoundDrawableTintList(binder.fragmentDashboardTxtHello, ColorStateList.valueOf(color))
+        binder.fragmentDashboardTxtGreetings.text = getString(R.string.label_greet_user,greet,sharedPrefsUtil.getUserName())
     }
 
     private fun handleIncludedLayoutViews(){
 
-        val includedBinder = binder.fragmentDashboardViewRecyclerAndButton
-        includedBinder.stocksTxtAdd.text = getString(R.string.ver_todas)
 
-        includedBinder.stocksTxtAdd.setOnClickListener{
-
-            requireActivity().startActivity(Intent(requireActivity(),StocksActivity::class.java))
-
-        }
 
     }
 
     private fun showAndHideTotalInvested(){
 
-        val txtValue = binder.fragmentDashboardTxtTotalInvested
+        val balanceLayout = binder.fragmentDashboardLayoutBalance
 
-        binder.fragmentDashboardImageEnableView.setOnClickListener{
+        val txtValue = balanceLayout.layoutCardBalanceDashboardTxtTotalInvested
+
+        balanceLayout.layoutCardBalanceDashboardImageVisibility.setOnClickListener{
 
             if (txtValue.text.toString().contains("●")) {
                 txtValue.text = "R$ 89.666"

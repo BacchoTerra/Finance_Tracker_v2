@@ -48,17 +48,10 @@ class StocksActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binder = ActivityStocksBinding.inflate(layoutInflater)
         setContentView(binder.root)
-        initToolbar()
         initRecyclerViewLayout()
         createActivityContract()
         fetchStocks(0)
 
-
-    }
-
-    private fun initToolbar() {
-
-        setSupportActionBar(binder.activityStocksToolbar)
 
     }
 
@@ -101,19 +94,12 @@ class StocksActivity : AppCompatActivity() {
     private fun initRecyclerViewLayout() {
 
 
-        val recyclerViewLayoutBinder = binder.includedLayout
 
-        recyclerView = recyclerViewLayoutBinder.stocksRecyclerView
+        recyclerView = binder.activityStocksRecyclerView
         recyclerViewAdapter = StockAdapter(this)
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-
-        recyclerViewLayoutBinder.stocksTxtAdd.setOnClickListener {
-
-            activityLauncher.launch(Intent(this, AddStockActivity::class.java))
-
-        }
 
 
     }

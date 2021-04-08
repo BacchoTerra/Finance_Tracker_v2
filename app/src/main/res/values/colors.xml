@@ -11,6 +11,8 @@
     <color name="primaryColor">#3F51B5</color>
     <color name="primaryColorDark">#303F9F</color>
     <color name="primaryColorLight">#C5CAE9</color>
+    <color name="transparentPrimaryColor">#263F51B5</color>
+    <color name="transparentWhite">#26ffffff</color>
     <color name="secondaryColor">#7C4DFF</color>
 
     <color name="mainBackgroundColor">#F4F4F4</color>

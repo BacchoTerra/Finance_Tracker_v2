@@ -111,4 +111,11 @@
     <string name="label_max_day">Max. dia R$ %1$.2f</string>
     <string name="label_min_day">Min. dia R$ %1$.2f</string>
     <string name="label_current_value">Valor atual R$ %1$.2f</string>
+    <string name="opened_Stocks">Ações abertas</string>
+    <string name="articles">Artigos</string>
+    <string name="investidos_estudioso">Investidos estudioso</string>
+    <string name="balance">Balanço</string>
+    <string name="procurar_a_o">Procurar ação</string>
+    <string name="minhas_a_es">Minhas ações</string>
+    <string name="nova">+ Nova</string>
 </resources>
