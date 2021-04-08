@@ -1,13 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor">
+    android:background="@drawable/gradient_primary_secondary_color">
 
 
+    <TextView
+        android:id="@+id/activity_stocks_labelMyStocks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/minhas_a_es"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/activity_stocks_imageClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:tint="@color/iconsColor"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_stocks_labelMyStocks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_stocks_labelMyStocks"
+        app:srcCompat="@drawable/ic_baseline_close_24" />
+
+    <include
+        android:id="@+id/activity_stocks_layoutSearchView"
+        layout="@layout/layout_search_edit_and_filter_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/activity_stocks_imageClose"
+        app:layout_constraintStart_toStartOf="@+id/activity_stocks_labelMyStocks"
+        app:layout_constraintTop_toBottomOf="@+id/activity_stocks_labelMyStocks" />
+
+    <include
+        android:id="@+id/activity_stocks_layoutOpenedStocks"
+        layout="@layout/layout_round_transparent_box_2_centered_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/activity_stocks_layoutSearchView"
+        app:layout_constraintTop_toBottomOf="@+id/activity_stocks_layoutSearchView" />
+
+    <include
+        android:id="@+id/activity_stocks_layoutClosedStocks"
+        layout="@layout/layout_round_transparent_box_2_centered_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_stocks_layoutOpenedStocks"
+        app:layout_constraintStart_toEndOf="@+id/activity_stocks_layoutOpenedStocks"
+        app:layout_constraintTop_toTopOf="@+id/activity_stocks_layoutOpenedStocks" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/mainBackgroundColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/activity_stocks_labelStockName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Name"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/activity_stocks_layoutOpenedStocks"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <TextView
+        android:id="@+id/activity_stocks_labelValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="95dp"
+        android:text="@string/value"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_stocks_labelDate"
+        app:layout_constraintEnd_toStartOf="@+id/activity_stocks_labelDate"
+        app:layout_constraintTop_toTopOf="@+id/activity_stocks_labelDate" />
+
+    <TextView
+        android:id="@+id/activity_stocks_labelDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/Date"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_stocks_labelStockName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_stocks_labelStockName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_stocks_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/row_stock"
+        app:layout_constraintEnd_toEndOf="@+id/activity_stocks_labelDate"
+        app:layout_constraintStart_toStartOf="@+id/activity_stocks_labelStockName"
+        app:layout_constraintTop_toBottomOf="@+id/activity_stocks_labelStockName" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:padding="4dp"
+        android:text="@string/nova"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_stocks_layoutOpenedStocks" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="230dp"
@@ -37,7 +171,6 @@
         android:id="@+id/included_layout"
         layout="@layout/view_stock_recycler_view_with_add_button" />
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+-->
 
 

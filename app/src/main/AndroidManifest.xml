@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bacchoterra.financetrackerv2">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".application.FinanceApplication"
         android:allowBackup="true"
@@ -10,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinanceTrackerV2">
-        <activity android:name=".view.ShowStockActivity"></activity>
+        <activity android:name=".view.ShowStockActivity"/>
         <activity android:name=".view.AddStockActivity" />
         <activity android:name=".view.StocksActivity" />
         <activity android:name=".view.MainActivity" />

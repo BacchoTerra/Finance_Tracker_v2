@@ -5,9 +5,63 @@
     android:id="@+id/row_stock_rootLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="8dp"
-    android:layout_marginHorizontal="4dp"
-    android:background="@drawable/shape_row_stock_background">
+    android:layout_marginTop="12dp"
+    android:background="@color/mainBackgroundColor">
+
+    <ImageView
+        android:id="@+id/row_stock_imageStatus"
+        android:layout_width="wrap_content"
+        app:tint="@color/primaryColor"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_brightness_1_24" />
+
+    <TextView
+        android:id="@+id/row_stock_txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_imageStatus"
+        app:layout_constraintStart_toEndOf="@+id/row_stock_imageStatus"
+        app:layout_constraintTop_toTopOf="@+id/row_stock_imageStatus"
+        tools:text="ALUP4" />
+
+    <TextView
+        android:id="@+id/row_stock_txtTotalSpent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_txtName"
+        app:layout_constraintEnd_toStartOf="@+id/row_stock_txtDate"
+        app:layout_constraintTop_toTopOf="@+id/row_stock_txtName"
+        tools:text="R$ 46,56" />
+
+    <TextView
+        android:id="@+id/row_stock_txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_txtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/row_stock_txtName"
+        tools:text="22/12/2020" />
+
+    <include
+        layout="@layout/divider_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_txtName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/row_stock_image_view"
@@ -16,7 +70,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/shape_round_view"
+        android:background="@drawable/shape_round_view_primary_color"
         android:padding="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,4 +116,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="R$ 1500.00" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        -->

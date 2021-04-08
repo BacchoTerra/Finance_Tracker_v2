@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
 import com.bacchoterra.financetrackerv2.model.Stock
+import com.bacchoterra.financetrackerv2.utils.DateUtil
 import com.bacchoterra.financetrackerv2.utils.NumbersUtil
 import com.bacchoterra.financetrackerv2.view.ShowStockActivity
 import com.bacchoterra.financetrackerv2.view.StocksActivity
 
-class StockAdapter(val activity: Activity) :
+class StockAdapter(private val activity: Activity) :
     ListAdapter<Stock, StockAdapter.MyViewHolder>(StockComparator()) {
 
 
@@ -42,11 +43,12 @@ class StockAdapter(val activity: Activity) :
     private fun bindStock(holder: MyViewHolder, stock: Stock) {
 
         holder.txtName.text = stock.name
-        stock.broker?.let { holder.txtBroker.text = stock.broker }
+        holder.txtDate.text = DateUtil.formatDate(stock.initialTimestamp,DateUtil.DEFAULT_PATTERN)
         holder.txtTotalSpent.text = activity.getString(
             R.string.money_symbol_price,
             NumbersUtil.roundAndFormatToCurrency(stock.totalSpent)
         )
+
 
 
         when {
@@ -56,26 +58,9 @@ class StockAdapter(val activity: Activity) :
                 holder.imageStatus.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity,
-                        R.drawable.ic_baseline_attach_money_24
+                        R.drawable.ic_baseline_receipt_24
                     )
                 )
-
-                if (stock.profit!! >= 0) {
-                    holder.imageStatus.imageTintList = ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            activity,
-                            R.color.chatGreenColor
-                        )
-                    )
-                } else {
-
-                    holder.imageStatus.imageTintList = ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            activity,
-                            R.color.error_color
-                        )
-                    )
-                }
 
 
             }
@@ -85,14 +70,14 @@ class StockAdapter(val activity: Activity) :
                 holder.imageStatus.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity,
-                        R.drawable.ic_round_trending_up_24
+                        R.drawable.ic_baseline_brightness_1_24
                     )
                 )
 
                 holder.imageStatus.imageTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(
                         activity,
-                        R.color.chatGreenColor
+                        R.color.secondaryColor
                     )
                 )
 
@@ -117,10 +102,10 @@ class StockAdapter(val activity: Activity) :
 
 
         val rootLayout: ViewGroup = view.findViewById(R.id.row_stock_rootLayout)
-        val imageStatus: ImageView = view.findViewById(R.id.row_stock_image_view)
+        val imageStatus: ImageView = view.findViewById(R.id.row_stock_imageStatus)
         val txtName: TextView = view.findViewById(R.id.row_stock_txtName)
-        val txtBroker: TextView = view.findViewById(R.id.row_stock_txtBroker)
-        val txtTotalSpent: TextView = view.findViewById(R.id.row_stock_txt_totalSpent)
+        val txtTotalSpent: TextView = view.findViewById(R.id.row_stock_txtTotalSpent)
+        val txtDate: TextView = view.findViewById(R.id.row_stock_txtDate)
 
 
     }

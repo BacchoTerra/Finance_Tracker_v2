@@ -8,6 +8,113 @@
     android:background="@color/primaryColor"
     tools:context=".fragments.DashboardFragment">
 
+
+    <TextView
+        android:id="@+id/fragment_dashboard_txtGreetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Boa noite"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_dashboard_txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bruno"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_txtGreetings"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_txtGreetings" />
+
+    <TextView
+        android:id="@+id/fragment_dashboard_txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="05 out 2021"
+        android:textColor="@color/hintTextColor"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/fragment_dashboard_txtName"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_txtName" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_round_view_primary_color"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/mainBackgroundColor"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_dashboard_txtDate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <include
+                android:id="@+id/fragment_dashboard_layoutBalance"
+                layout="@layout/layout_card_balance_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp" />
+
+            <include
+                android:id="@+id/fragment_dashboard_layoutArticles"
+                layout="@layout/layout_card_articles_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/fragment_dashboard_labelOpenedStocks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/opened_Stocks"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_dashboard_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--
+
     <TextView
         android:id="@+id/fragment_dashboard_txtHello"
         android:layout_width="wrap_content"
@@ -108,13 +215,15 @@
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_round_view"
+        android:background="@drawable/shape_round_view_primary_color.xml"
         android:padding="2dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_dashboard_txtHello"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fragment_dashboard_txtHello" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+-->
 
     <!--
 
