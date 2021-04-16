@@ -10,10 +10,11 @@ class StockViewModel(private val repo: StockRepository) : ViewModel() {
 
     companion object {
 
-        const val ORDER_BY_DESC = 1
-        const val ORDER_BY_ASC = 2
+        const val ORDER_BY_TOTAL_SPENT_DESC = 1
+        const val ORDER_BY_TOTAL_SPENT_ASC = 2
         const val FINISHED = 3
         const val UNFINISHED = 4
+        const val ORDER_BY_DATE_DESC = 5
 
     }
 
@@ -38,10 +39,11 @@ class StockViewModel(private val repo: StockRepository) : ViewModel() {
 
         return when (filter) {
 
-            ORDER_BY_DESC ->  repo.selectAllOrderByDesc().asLiveData()
-            ORDER_BY_ASC ->  repo.selectAllOrderByAsc().asLiveData()
+            ORDER_BY_TOTAL_SPENT_DESC ->  repo.selectAllOrderByTotalSpentDesc().asLiveData()
+            ORDER_BY_TOTAL_SPENT_ASC ->  repo.selectAllOrderByTotalSpentAsc().asLiveData()
             FINISHED ->  repo.selectAllFinished().asLiveData()
             UNFINISHED ->  repo.selectAllUnfinished().asLiveData()
+            ORDER_BY_DATE_DESC -> repo.selectAllOrderByDateDesc().asLiveData()
             else -> repo.selectAll().asLiveData()
         }
 

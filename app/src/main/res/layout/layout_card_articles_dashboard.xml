@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/secondaryColor"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,36 +17,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="9dp">
 
-
-            <TextView
-                android:id="@+id/layout_card_articles_dashboard_txtBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/articles"
-                android:textColor="@color/primaryTextColorOnPrimaryColor"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/layout_card_articles_dashboard_labelTotalInvested"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/investidos_estudioso"
-                android:textColor="@color/hintTextColor"
+                android:textColor="@color/secondaryTextColor"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/layout_card_articles_dashboard_txtBalance"
-                app:layout_constraintTop_toBottomOf="@+id/layout_card_articles_dashboard_txtBalance" />
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/layout_card_articles_dashboard_txtTotalInvested"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2 de 4"
-                android:textColor="@color/primaryTextColorOnPrimaryColor"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@+id/layout_card_articles_dashboard_labelTotalInvested"
                 app:layout_constraintTop_toBottomOf="@+id/layout_card_articles_dashboard_labelTotalInvested" />

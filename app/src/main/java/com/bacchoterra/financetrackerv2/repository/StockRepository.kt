@@ -37,15 +37,15 @@ class StockRepository(private val stockDao: StockDao) {
 
     }
 
-    fun selectAllOrderByDesc(): Flow<List<Stock>> {
+    fun selectAllOrderByTotalSpentDesc(): Flow<List<Stock>> {
 
-        return stockDao.selectAllOrderByDesc()
+        return stockDao.selectAllOrderByTotalSpentDesc()
 
     }
 
-    fun selectAllOrderByAsc(): Flow<List<Stock>> {
+    fun selectAllOrderByTotalSpentAsc(): Flow<List<Stock>> {
 
-        return stockDao.selectAllOrderByAsc()
+        return stockDao.selectAllOrderByTotalSpentAsc()
 
     }
 
@@ -58,6 +58,12 @@ class StockRepository(private val stockDao: StockDao) {
     fun selectAllUnfinished(): Flow<List<Stock>> {
 
         return stockDao.selectAllUnfinished()
+
+    }
+
+    fun selectAllOrderByDateDesc():Flow<List<Stock>>{
+
+        return stockDao.selectAllOrderByDateDes()
 
     }
 

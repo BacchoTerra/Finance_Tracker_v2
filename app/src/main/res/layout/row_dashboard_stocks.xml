@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingVertical="8dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/row_dashboard_stock_txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="apr. 2021"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/row_dashboard_stock_imageStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_round_view_transparent_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_dashboard_stock_txtDate"
+        app:srcCompat="@drawable/ic_baseline_brightness_1_24" />
+
+    <TextView
+        android:id="@+id/row_dashboard_stock_txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_light"
+        android:layout_marginStart="16dp"
+        tools:text="Itub 4"
+        app:layout_constraintStart_toEndOf="@+id/row_dashboard_stock_imageStatus"
+        app:layout_constraintTop_toTopOf="@+id/row_dashboard_stock_imageStatus" />
+
+    <TextView
+        android:id="@+id/row_dashboard_stock_txtValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        tools:text="R$ 12,68"
+        app:layout_constraintStart_toStartOf="@+id/row_dashboard_stock_txtName"
+        app:layout_constraintTop_toBottomOf="@+id/row_dashboard_stock_txtName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_right_top_round"
+    android:backgroundTint="@color/black"
+    android:paddingStart="16dp"
+    android:paddingBottom="150dp"
+    tools:ignore="RtlSymmetry">
+
+    <TextView
+        android:id="@+id/layout_quick_access_labelQuickAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/label_quick_access"
+        android:textColor="@color/secondaryTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layout_quick_access_txtStockName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:text="ALUP4"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        app:drawableStartCompat="@drawable/ic_baseline_brightness_1_24"
+        app:drawableTint="@color/secondaryColor"
+        app:layout_constraintStart_toStartOf="@+id/layout_quick_access_labelQuickAccess"
+        app:layout_constraintTop_toBottomOf="@+id/layout_quick_access_labelQuickAccess" />
+
+    <TextView
+        android:id="@+id/layout_quick_access_txtQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:text="2 papéis"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        app:layout_constraintStart_toStartOf="@+id/layout_quick_access_txtStockName"
+        app:layout_constraintTop_toBottomOf="@+id/layout_quick_access_txtStockName" />
+
+    <TextView
+        android:id="@+id/layout_quick_access_txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="12/08/2012"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        app:layout_constraintStart_toStartOf="@+id/layout_quick_access_txtQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/layout_quick_access_txtQuantity" />
+
+    <TextView
+        android:id="@+id/layout_quick_access_txtValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="R$ 45,90"
+        android:textColor="@color/primaryTextColorOnPrimaryColor"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_quick_access_txtStockName"
+        app:layout_constraintStart_toEndOf="@+id/layout_quick_access_txtStockName"
+        app:layout_constraintTop_toTopOf="@+id/layout_quick_access_txtStockName" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/layout_quick_access_imageGo"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/shape_all_round_no_color_white_stroke"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_quick_access_txtValue"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
+        app:tint="@color/white" />
+</androidx.constraintlayout.widget.ConstraintLayout>

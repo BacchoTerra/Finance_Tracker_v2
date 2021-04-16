@@ -30,9 +30,13 @@ interface StockDao {
     fun selectAllFinished():Flow<List<Stock>>
 
     @Query("SELECT * FROM stock_table ORDER BY totalSpent DESC")
-    fun selectAllOrderByDesc():Flow<List<Stock>>
+    fun selectAllOrderByTotalSpentDesc():Flow<List<Stock>>
 
     @Query("SELECT * FROM stock_table ORDER BY totalSpent ASC")
-    fun selectAllOrderByAsc():Flow<List<Stock>>
+    fun selectAllOrderByTotalSpentAsc():Flow<List<Stock>>
+
+    @Query("SELECT * FROM stock_table ORDER BY initialTimestamp DESC")
+    fun selectAllOrderByDateDes():Flow<List<Stock>>
+
 
 }

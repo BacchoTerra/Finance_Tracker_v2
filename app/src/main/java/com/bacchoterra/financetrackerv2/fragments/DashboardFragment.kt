@@ -12,11 +12,16 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bacchoterra.financetrackerv2.R
+import com.bacchoterra.financetrackerv2.adapter.DashboardStockAdapter
+import com.bacchoterra.financetrackerv2.application.FinanceApplication
 import com.bacchoterra.financetrackerv2.databinding.FragmentDashboardBinding
 import com.bacchoterra.financetrackerv2.utils.SharedPrefsUtil
 import com.bacchoterra.financetrackerv2.view.StocksActivity
+import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
 import java.util.*
 
 
@@ -24,10 +29,19 @@ class DashboardFragment : Fragment() {
 
     //Layout components
     private lateinit var binder: FragmentDashboardBinding
+
+    //RecyclerView
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: DashboardStockAdapter
+
 
     //SharedPrefsManage
     private lateinit var sharedPrefsUtil: SharedPrefsUtil
+
+    //ViewModel
+    private val stockViewModel:StockViewModel by viewModels {
+        StockViewModel.StockViewModelFactory((requireActivity().application as FinanceApplication).stockRepository)
+    }
 
 
     override fun onCreateView(
@@ -35,14 +49,21 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binder = FragmentDashboardBinding.inflate(inflater)
+
         greetUser()
-        handleIncludedLayoutViews()
-        showAndHideTotalInvested()
+        initRecyclerView()
+
+        stockViewModel.selectAllStockWithFilter(StockViewModel.ORDER_BY_DATE_DESC).observe(viewLifecycleOwner, {
+
+            adapter.submitList(it)
+
+        })
 
 
-        binder.fragmentDashboardTxtGreetings.setOnClickListener{
 
-            requireActivity().startActivity(Intent(requireContext(),StocksActivity::class.java),)
+        binder.fragmentDashboardBtnSeeMoreStocks.setOnClickListener{
+
+            startActivity(Intent(activity,StocksActivity::class.java))
 
         }
 
@@ -52,19 +73,21 @@ class DashboardFragment : Fragment() {
     private fun greetUser(){
 
         sharedPrefsUtil = SharedPrefsUtil(requireActivity())
+        binder.fragmentDashboardTxtName.text = sharedPrefsUtil.getUserName()
+
         val calendar = Calendar.getInstance()
 
         when (calendar.get(Calendar.HOUR_OF_DAY)) {
 
             in (4..11) -> {
-                setGreetTextAndDrawable(getString(R.string.good_morning))
+                setDateTimeGreetings(getString(R.string.good_morning))
 
             }
             in (12..18) -> {
-                setGreetTextAndDrawable(getString(R.string.good_afternoon))
+                setDateTimeGreetings(getString(R.string.good_afternoon))
             }
             else -> {
-                setGreetTextAndDrawable(getString(R.string.good_evening))
+                setDateTimeGreetings(getString(R.string.good_evening))
             }
 
         }
@@ -76,31 +99,19 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun setGreetTextAndDrawable(greet:String){
+    private fun setDateTimeGreetings(greet:String){
 
-        binder.fragmentDashboardTxtGreetings.text = getString(R.string.label_greet_user,greet,sharedPrefsUtil.getUserName())
+        binder.fragmentDashboardTxtGreetings.text = greet
     }
 
-    private fun handleIncludedLayoutViews(){
+    private fun initRecyclerView(){
 
+        recyclerView = binder.fragmentDashboardRecyclerView
 
-
-    }
-
-    private fun showAndHideTotalInvested(){
-
-        val balanceLayout = binder.fragmentDashboardLayoutBalance
-
-        val txtValue = balanceLayout.layoutCardBalanceDashboardTxtTotalInvested
-
-        balanceLayout.layoutCardBalanceDashboardImageVisibility.setOnClickListener{
-
-            if (txtValue.text.toString().contains("●")) {
-                txtValue.text = "R$ 89.666"
-            }else{
-                txtValue.text = getString(R.string.label_value_mask)
-            }
-        }
+        adapter = DashboardStockAdapter(requireContext())
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
 
     }
 
