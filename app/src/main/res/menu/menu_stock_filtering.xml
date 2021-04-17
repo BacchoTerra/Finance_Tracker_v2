@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_stock_toolbar_filter_all"
+        android:title="@string/todas_acoes" />
+
+    <item
+        android:id="@+id/menu_stock_toolbar_filter_maior_menor"
+        android:title="@string/pre_o_total_maior_menor" />
+
+    <item
+        android:id="@+id/menu_stock_toolbar_filter_menor_maior"
+        android:title="@string/pre_o_a_o_maior_menor" />
+
+    <item
+        android:id="@+id/menu_stock_toolbar_filter_finalized"
+        android:title="@string/somente_finalizadas" />
+
+    <item
+        android:id="@+id/menu_stock_toolbar_filter_opened"
+        android:title="@string/somente_abertas" />
+
+
+</menu>

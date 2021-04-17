@@ -7,7 +7,7 @@
     android:background="@drawable/shape_right_top_round"
     android:backgroundTint="@color/black"
     android:paddingStart="16dp"
-    android:paddingBottom="150dp"
+    android:paddingBottom="24dp"
     tools:ignore="RtlSymmetry">
 
     <TextView

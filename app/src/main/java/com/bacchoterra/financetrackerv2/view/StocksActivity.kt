@@ -3,8 +3,8 @@ package com.bacchoterra.financetrackerv2.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,7 +19,7 @@ import com.bacchoterra.financetrackerv2.databinding.ActivityStocksBinding
 import com.bacchoterra.financetrackerv2.model.Stock
 import com.bacchoterra.financetrackerv2.viewmodel.StockViewModel
 
-class StocksActivity : AppCompatActivity() {
+class StocksActivity : AppCompatActivity(),PopupMenu.OnMenuItemClickListener{
 
     //Layout components
     private lateinit var binder: ActivityStocksBinding
@@ -52,7 +52,12 @@ class StocksActivity : AppCompatActivity() {
 
         binder.activityStocksTxtNew.setOnClickListener{
 
-            startActivity(Intent(this,AddStockActivity::class.java))
+            activityLauncher.launch(Intent(this,AddStockActivity::class.java))
+
+        }
+        binder.activityStocksLayoutSearchView.layoutSearchEditAndFilterIconImageFilter.setOnClickListener{
+
+            createFilterMenu()
 
         }
 
@@ -108,16 +113,20 @@ class StocksActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    private fun createFilterMenu() {
 
-        menuInflater.inflate(R.menu.menu_stock_toolbar, menu)
+        val popupMenu = PopupMenu(this,binder.activityStocksLayoutSearchView.layoutSearchEditAndFilterIconImageFilter)
+        popupMenu.menuInflater.inflate(R.menu.menu_stock_filtering,popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener(this)
+        popupMenu.show()
 
-        return true
+
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemClick(p0: MenuItem?): Boolean {
 
-        when (item.itemId) {
+        when (p0?.itemId) {
 
             R.id.menu_stock_toolbar_filter_all -> fetchStocks(0)
             R.id.menu_stock_toolbar_filter_maior_menor -> fetchStocks(StockViewModel.ORDER_BY_TOTAL_SPENT_DESC)

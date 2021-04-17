@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/layout_search_edit_and_filter_icon_editStockName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,13 +35,14 @@
         app:layout_constraintGuide_percent=".8" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/layout_search_edit_and_filter_icon_imageFilter"
         android:layout_width="wrap_content"
+        android:padding="4dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_search_edit_and_filter_icon_editStockName"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/iconsColor"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/layout_search_edit_and_filter_icon_editStockName"
         app:srcCompat="@drawable/ic_baseline_signal_cellular_alt_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

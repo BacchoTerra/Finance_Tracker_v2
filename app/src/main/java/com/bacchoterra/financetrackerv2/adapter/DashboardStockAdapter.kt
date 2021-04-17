@@ -18,7 +18,7 @@ class DashboardStockAdapter(val context: Context) :
 
     //Date checker
     private var calendar: Calendar = Calendar.getInstance()
-    private var currentMonth: Int? = null
+    private var currentMonthAndYear = 0
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyStockViewHolder {
@@ -71,42 +71,45 @@ class DashboardStockAdapter(val context: Context) :
             )
         }
 
-        when {
+        handleDateDisplaying(holder,stock)
 
-            shouldShowDate(stock) -> {
+    }
 
-                val month =
-                    calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault())
-                val year = calendar.get(Calendar.YEAR)
+    private fun handleDateDisplaying(holder: MyStockViewHolder,stock: Stock) {
 
-                holder.txtDate.text =
-                    context.getString(R.string.label_month_display_name_and_year, month, year)
-
-                holder.txtDate.visibility = View.VISIBLE
-            }
-
-            else -> holder.txtDate.visibility = View.GONE
-
+        if (currentMonthAndYear == 0 || isDifferentDate(stock)) {
+            calendar.timeInMillis = stock.initialTimestamp
+            currentMonthAndYear = calendar.get(Calendar.MONTH) + calendar.get(Calendar.YEAR)
+            displayStockDate(holder,stock)
+            return
         }
+
+        holder.txtDate.visibility = View.GONE
 
 
     }
 
-    private fun shouldShowDate(stock: Stock): Boolean {
+    private fun displayStockDate(holder: MyStockViewHolder,stock: Stock) {
 
         calendar.timeInMillis = stock.initialTimestamp
 
-        if (currentMonth == null) {
-            currentMonth = calendar.get(Calendar.MONTH)
-            return true
-        } else {
+        val display = context.getString(R.string.label_month_display_name_and_year,calendar.getDisplayName(Calendar.MONTH,Calendar.SHORT,
+            Locale.getDefault()),calendar.get(Calendar.YEAR))
 
-            if (currentMonth == calendar.get(Calendar.MONTH)) {
-                return false
-            }
+        holder.txtDate.visibility = View.VISIBLE
+        holder.txtDate.text = display
 
-            return true
-        }
+
+    }
+
+    private fun isDifferentDate(stock: Stock):Boolean {
+
+        calendar.timeInMillis = stock.initialTimestamp
+
+        val newMonthAndYear = calendar.get(Calendar.MONTH) + calendar.get(Calendar.YEAR)
+
+        return currentMonthAndYear != newMonthAndYear
+
 
     }
 
